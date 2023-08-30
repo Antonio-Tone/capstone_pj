@@ -1,9 +1,10 @@
 const db = require("../config");
-class Vehicles{
-    fetchVehicles(req, res) {
+class Orders{
+    
+    fetchOrders(req, res) {
         const query = `
-            SELECT vehicleID, vehicleName,brand,inventory,rating,speed,year,imageURL,hoveredURL,category,rate 
-            FROM vehicles
+            SELECT orderID,price,userID,vehicleID,orderDate 
+            FROM orders
         `;
         db.query(query, (err, data) => {
           if (err) throw err;
@@ -14,11 +15,10 @@ class Vehicles{
         });
       }
 
-      fetchVehicle(req, res) {
+      fetchOrder(req, res) {
         const query = `
-        SELECT vehicleID, vehicleName,brand,inventory,rating,speed,year,imageURL,hoveredURL,category,rate 
-            FROM vehicles 
-            WHERE vehicleID = ${req.params.id}
+        SELECT orderID,price,userID,vehicleID,orderDate FROM orders 
+            WHERE orderID = ${req.params.id}
         `;
         db.query(query, (err, result) => {
           if (err) throw err;
@@ -28,50 +28,50 @@ class Vehicles{
           });
         });
       }
-// deleting vehicle
-      deleteVehicle(req, res) {
+// deleting order
+      deleteOrder(req, res) {
         const query = `
-            DELETE FROM vehicles WHERE vehicleID = ${req.params.id}
+            DELETE FROM orders WHERE orderID = ${req.params.id}
         `;
     
         db.query(query, [req.params.id], (err) => {
           if (err) throw err;
           res.json({
             status: res.statusCode,
-            msg: "vehicle record was deleted successfully",
+            msg: "Order record was deleted successfully",
           });
         });
       }
 
-      updateVehicle(req, res){
+      updateOrder(req, res){
         const query = `
-            UPDATE vehicles SET ? WHERE vehicleID = ${req.params.id}
+            UPDATE orders SET ? WHERE orderID = ${req.params.id}
         `
         db.query(query, [req.body, req.params.id], (err)=>{
             if (err) throw err
             res.json({
                 status: res.statusCode,
-                msg: "vehicle record udpated successfully"
+                msg: "Order record udpated successfully"
             })
         })
     }
 
-      addVehicle(req, res){
+      addOrder(req, res){
         const query = `
-            INSERT INTO vehicles SET ?
+            INSERT INTO orders SET ?
         `
         db.query(query, [req.body], (err)=>{
             if (err) throw err
             res.json({
                 status: res.statusCode,
-                msg: "vehicle inserted successfully"
+                msg: "Order inserted successfully"
             })
         })
     }
     }
 
 
-    module.exports = Vehicles;
+    module.exports = Orders;
 
 
 
