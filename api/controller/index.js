@@ -65,7 +65,7 @@ routes.patch("/Order/:id", bodyParser.json(), (req, res) => {
 });
 routes.delete("/Order/:id", (req, res) => {
   
-  orders.deleteList(req, res);
+  orders.deleteOrder(req, res);
 });
 
 
