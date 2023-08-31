@@ -1,5 +1,4 @@
 // Config || Database Configuration
-
 require("dotenv").config();
 const { createPool } = require("mysql");
 // Create connection variable
@@ -12,5 +11,4 @@ let connection = createPool({
   multipleStatements: true,
   connectionLimit: 30,
 });
-
 module.exports = connection;
