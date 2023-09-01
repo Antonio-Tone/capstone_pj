@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
-const miniURL = "https://capstone-api-ec2a.onrender.com/";
+const miniURL = "https://capstone-api-ec2a.onrender.com/";   
+ //capstone-api-ec2a.onrender.com
 export default createStore({
   state: {
     users: null,
