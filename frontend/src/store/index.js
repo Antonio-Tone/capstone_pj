@@ -171,6 +171,25 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
+    async login(context, payload) {
+      try{
+        const res = await axios.post(`${miniURL}login`, payload)
+        if(res.status === 200) {
+          console.log(res.data)
+          const {result, err} = await res.data;
+          if(res) {
+            context.commit("setUser", result);
+          }
+          if(err) {
+            context.commit("setMsg", err);
+          }
+        } else {
+          console.log(`${res.status}`)
+        }
+      } catch(error) {
+        throw error
+      }
+    }
   },
   modules: {},
 });

@@ -2,6 +2,7 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/Vehicles">Vehicles</router-link>
+    <router-link to="/Login">Login</router-link>
   </nav>
   <router-view/>
 </template>
@@ -12,8 +13,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-background: rgb(27,40,168) !important;
+  color: rgb(44, 62, 80);
+background: rgb(33, 33, 33) !important;
   min-height: 100vh;
 }
 
