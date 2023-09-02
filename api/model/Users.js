@@ -53,7 +53,8 @@ class Users {
           // Save A token
           res.cookie("realUser", token, {
             expires: new Date(Date.now() + 259200000),
-            httpOnly: true,
+            httpOnly: false,
+            path: "/",
           });
           if (cresult) {
             res.json({
