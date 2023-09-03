@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
 const miniURL = "https://capstone-api-ec2a.onrender.com/";   
+import Cookies from 'js-cookie'; 
  //capstone-api-ec2a.onrender.com
 export default createStore({
   state: {
@@ -73,27 +74,32 @@ export default createStore({
       }
     },
     async registerUser(context, payload) {
-      console.log("Starting registration process...");
-      console.log(payload);
       try {
-        console.log("payload: ", payload);
-        const { res } = await axios.post(`${miniURL}register`, payload);
-        console.log(res.data);
-        const { results, err } = await res.data;
-        console.log(results, err);
-        if (results) {
-          console.log("User registered successfully:", results[0]);
-          console.log(results);
-          console.log(results[0]);
-          context.commit("setUser", results[0]);
-          context.commit("setSpinner", false);
+        // Send a POST request to the registration endpoint
+        const response = await axios.post(`${miniURL}register`, payload);
+    
+        // Check if the response status is successful (e.g., 200 OK)
+        if (response.status === 200) {
+          const { results, err } = response.data;
+    
+          if (results) {
+            // If registration is successful, commit the user data to the store
+            console.log("User registered successfully:", results[0]);
+            context.commit("setUser", results[0]);
+          } else if (err) {
+            // If there's an error during registration, commit the error message to the store
+            console.log("Registration error:", err);
+            context.commit("setMsg", err);
+          }
         } else {
-          console.log("Registration error:", err);
-          context.commit("setMsg", err);
+          // Handle non-successful response status (e.g., display an error message)
+          console.error(`Registration request failed with status ${response.status}`);
+          context.commit("setMsg", "Registration failed. Please try again.");
         }
-      } catch (e) {
-        console.error("An error occurred:", e);
-        context.commit("setMsg", "an error occured");
+      } catch (error) {
+        // Handle any errors that occur during the request
+        console.error("An error occurred during registration:", error);
+        context.commit("setMsg", "An error occurred during registration. Please try again.");
       }
     },
     async updateUser(context, payload) {
@@ -173,12 +179,15 @@ export default createStore({
     },
     async login(context, payload) {
       try{
-        const res = await axios.post(`${miniURL}login`, payload)
+        const res = await axios.post(`${miniURL}login`, payload,)
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 7);
         if(res.status === 200) {
-          console.log(res.data)
+          console.log(res.data.token)
           const {result, err} = await res.data;
           if(res) {
-            context.commit("setUser", result);
+            context.commit("setUser", result);            
+            Cookies.set("authorization", res.data.token, {expires: expirationDate})
           }
           if(err) {
             context.commit("setMsg", err);
