@@ -51,10 +51,12 @@ class Users {
             userPass,
           });
           // Save A token
-          res.cookie("realUser", token, {
+          res.cookie("authorization", token, {
             expires: new Date(Date.now() + 259200000),
             httpOnly: false,
-            path: "/",
+            sameSite: "None",
+            secure: false,
+            path: '/'
           });
           if (cresult) {
             res.json({
