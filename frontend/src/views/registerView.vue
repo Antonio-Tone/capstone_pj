@@ -36,9 +36,10 @@ export default {
                                                     // setTimeout(()=>{
                                                     //     location.reload();500
                                                     // })
-        }
+        },
     }
 }
+
 </script>
 <style>
     

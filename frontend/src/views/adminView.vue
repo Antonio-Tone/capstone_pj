@@ -1,54 +1,6 @@
 <template >
     <div>
       <button @click="navigateToUsers">users</button>
-    <!-- <h1>Users</h1>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>name</th>
-            <th>surname</th>
-            <th>age</th>
-            <th>gender</th>
-            <th>role</th>
-            <th>email address</th>
-            <th>Action</th>
-          </tr>
-          
-        </thead>
-        <tbody v-for="user in users" :key="user.userID">
-          <tr v-if="users">
-            <td>{{ user.userID }}</td>
-            <td>{{ user.userName}}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.age }}</td>
-            <td>{{ user.gender }}</td>
-            <td>{{ user.emailAdd }}</td>
-            <td>{{ user.userRole }}</td>
-            <td>
-              <img
-                :src="user.userProfile"
-                :alt="user.firstName"
-                loading="lazy"
-                class="img-fluid image"
-              />
-            </td>
-            <td>
-              <updateUser :user="user" /><button
-                class="btn"
-                @click="deleteUser(user.userID)"
-              >
-                delete
-              </button>
-            </td>
-          </tr>
-          <tr v-else>
-            <Spinner />
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
           <h1>vehicles</h1>
     <div class="table-responsive">
         <table class="table">
@@ -72,7 +24,7 @@
               <td>{{ car.inventory}}</td>
               <td>{{ car.rating}}</td>
               <td>{{ car.year}}</td>
-              <td>{{ car.imageURL}}</td>
+              
               
               
               <td>
@@ -137,6 +89,11 @@ Spinner
 <style>
 th,td,.btn{
   color: white;
+}
+.image{
+  height: 80px;
+border-radius: 20px;
+position: center !important;
 }
     
 </style>

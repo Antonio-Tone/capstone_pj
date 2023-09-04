@@ -24,8 +24,8 @@
             <td>{{ user.lastName }}</td>
             <td>{{ user.age }}</td>
             <td>{{ user.gender }}</td>
-            <td>{{ user.emailAdd }}</td>
             <td>{{ user.userRole }}</td>
+            <td>{{ user.emailAdd }}</td>
             <td>
               <img
                 :src="user.userProfile"
