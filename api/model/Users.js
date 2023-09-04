@@ -4,7 +4,7 @@ const { createToken } = require("../middleware/AuthenticateUser");
 class Users {
   fetchUsers(req, res) {
     const query = `
-    SELECT userID, userName, lastName, gender,age,emailAdd FROM users
+    SELECT userID, userName, lastName, gender,age,emailAdd,userRole FROM users
     `;
     db.query(query, (err, results) => {
       if (err) throw err;
@@ -16,7 +16,7 @@ class Users {
   }
   fetchUser(req, res) {
     const query = `
-    SELECT userID, userName, lastName, gender,age,emailAdd FROM users WHERE userID = ${req.params.id}
+    SELECT userID, userName, lastName, gender,age,emailAdd,userRole FROM users WHERE userID = ${req.params.id}
     `;
     db.query(query, (err, result) => {
       if (err) throw err;
@@ -83,25 +83,46 @@ class Users {
       emailAdd: data.emailAdd,
       userPass: data.userPass,
     };
-
-    const query = `
-      INSERT INTO users SET ?
+  
+    const checkQuery = `
+      SELECT COUNT(*) AS count FROM users WHERE emailAdd = ?
     `;
-
-    db.query(query, [data], (err) => {
-      if (err) throw err;
-      // Create token
-      let token = createToken(user);
-      res.cookie("LegitUser", token, {
-        expires: new Date(Date.now() + 259200000),
-        httpOnly: true, 
-      });
-      res.json({
-        status: res.statusCode,
-        msg: "User registered successfully!",
-      });
+  
+    db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
+      if (checkErr) {
+        throw checkErr;
+      }
+  
+      if (checkResults[0].count > 0) {
+        // Email address is already in use
+        res.status(400).json({
+          status: 400,
+          msg: "Email address is already in use.",
+        });
+      } else {
+        const insertQuery = `
+          INSERT INTO users SET ?
+        `;
+  
+        db.query(insertQuery, [data], (insertErr) => {
+          if (insertErr) {
+            throw insertErr;
+          }
+          // Create token
+          let token = createToken(user);
+          res.cookie("LegitUser", token, {
+            expires: new Date(Date.now() + 259200000),
+            httpOnly: true,
+          });
+          res.json({
+            status: res.statusCode,
+            msg: "User registered successfully!",
+          });
+        });
+      }
     });
   }
+  
   deleteUser(req, res) {
     const query = `
         DELETE FROM users WHERE userID = ${req.params.id}
