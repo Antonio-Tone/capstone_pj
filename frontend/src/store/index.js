@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
-const miniURL = "https://capstone-api-ec2a.onrender.com/";   
 import Cookies from 'js-cookie'; 
+const miniURL = "https://capstone-api-ec2a.onrender.com/";   
  //capstone-api-ec2a.onrender.com
 export default createStore({
   state: {
@@ -73,7 +73,7 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
-    async registerUser(context, payload) {
+   async registerUser(context, payload) {
       try {
         // Send a POST request to the registration endpoint
         const response = await axios.post(`${miniURL}register`, payload);
@@ -102,6 +102,7 @@ export default createStore({
         context.commit("setMsg", "An error occurred during registration. Please try again.");
       }
     },
+    
     async updateUser(context, payload) {
       try {
         const { res } = await axios.patch(
@@ -183,7 +184,7 @@ export default createStore({
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 7);
         if(res.status === 200) {
-          console.log(res.data.token)
+          console.log("successfully logged in");
           const {result, err} = await res.data;
           if(res) {
             context.commit("setUser", result);            

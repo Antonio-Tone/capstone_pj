@@ -22,6 +22,7 @@ export default {
     methods: {
         async loginCredentials() {
             await this.$store.dispatch('login', this.login)
+            this.$router.push("/Vehicles")
         }
     }
 }

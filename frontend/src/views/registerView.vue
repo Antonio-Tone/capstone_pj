@@ -31,6 +31,7 @@ export default {
         async registering() {
             console.log(this.register)
             await this.$store.dispatch('registerUser', this.register)
+            this.$router.push("/login")
                                                     //    this.model.register.userID
                                                     // setTimeout(()=>{
                                                     //     location.reload();500
