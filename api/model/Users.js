@@ -30,8 +30,7 @@ class Users {
     const { emailAdd, userPass } = req.body;
     // query
     const query = `
-      SELECT emailAdd,
-        userPass FROM
+      SELECT userID ,userName, lastName, gender, age, emailAdd, userPass, userRole FROM
          users WHERE emailAdd = ?
     `;
 
@@ -49,14 +48,6 @@ class Users {
           const token = createToken({
             emailAdd,
             userPass,
-          });
-          // Save A token
-          res.cookie("authorization", token, {
-            expires: new Date(Date.now() + 259200000),
-            httpOnly: false,
-            sameSite: "None",
-            secure: false,
-            path: '/'
           });
           if (cresult) {
             res.json({
