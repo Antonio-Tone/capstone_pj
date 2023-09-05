@@ -53,7 +53,7 @@ class Users {
             res.json({
               msg: "Logged in!",
               token,
-              cresult: cresult[0],
+              cresult: result[0],
             });
           } else {
             res.json({
