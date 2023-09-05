@@ -77,7 +77,7 @@ class Users {
   async register(req, res) {
     const data = req.body;
     // Encrypt password
-    data.userPass = await hash(data.userPass, 15);
+    data.userPass = await hash(data.userPass, 10);
     // Payload
     const user = {
       emailAdd: data.emailAdd,
@@ -85,7 +85,7 @@ class Users {
     };
   
     const checkQuery = `
-      SELECT COUNT(*) AS count FROM users WHERE emailAdd = ?
+      SELECT COUNT(*) AS count FROM users WHERE emailAdd = ${user.emailAdd}
     `;
   
     db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
