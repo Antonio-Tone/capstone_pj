@@ -183,22 +183,37 @@ export default createStore({
         const res = await axios.post(`${miniURL}login`, payload,)
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 7);
-        if(res.status === 200) {
-          console.log("successfully logged in");
-          const {result, err} = await res.data;
-          if(res) {
-            context.commit("setUser", result);            
-            Cookies.set("authorization", res.data.token, {expires: expirationDate})
-          }
-          if(err) {
-            context.commit("setMsg", err);
-          }
-        } else {
-          console.log(`${res.status}`)
+        console.log(res.data);
+        const { msg, token, cresult } = await res.data
+        console.log(cresult)
+        if(msg === "You are providing the wrong email"){
+          context.commit("setMsg", "You are providing the wrong email");
+        }
+        if(msg === "Logged in!"){
+          context.commit("setUser", cresult)
+          context.commit("setToken", token)
+          Cookies.set("authorization", context.state.token, {
+            expires: 1
+          })
+        } else{
+          context.commit("setMsg", err)
+          console.error("Something went wrong while logging in")
         }
       } catch(error) {
         throw error
       }
+    },
+    async check(context){
+      const token = Cookies.get("authorization")
+      if(token){
+        context.commit("setToken", token)
+      } else{
+        context.commit("setUser", null)
+        router.push('/login')
+      }
+    },
+    async run(context){
+      context.dispatch("check")
     }
   },
   modules: {},

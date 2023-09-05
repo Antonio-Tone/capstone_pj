@@ -1,8 +1,8 @@
 <template>
     <div>
         <form @submit.prevent="loginCredentials">
-            <input type="text" v-model="login.emailAdd">
-            <input type="password" v-model="login.userPass">
+            <input type="text" required v-model="login.emailAdd">
+            <input type="password" required v-model="login.userPass">
             <button type="submit">login</button>
         </form>
         
@@ -21,8 +21,13 @@ export default {
 
     methods: {
         async loginCredentials() {
-            await this.$store.dispatch('login', this.login)
-            this.$router.push("/Vehicles")
+            const res = await this.$store.dispatch('login', this.login)
+            console.log(res)
+            if(res.msg === "Logged in!"){
+                this.$router.push("/Vehicles")
+            } else{
+                alert("Not logged in! Please try again")
+            }
         }
     }
 }
