@@ -86,14 +86,6 @@
               placeholder="userRole"
               v-model="model.user.userRole"
             />
-            <!-- <label for="profilePic">Profile Image:</label>
-            <input
-              required
-              id="profilePic"
-              type="text"
-              placeholder="profile image"
-              v-model="model.user.userProfile"
-            /> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn bg-dark" data-bs-dismiss="modal">
@@ -113,7 +105,6 @@
 export default {
   data() {
     return {
-      addingUserID: null,
       model: {
         user: {
           userName: "",
@@ -122,7 +113,7 @@ export default {
           age: "",
           emailAdd: "",
           userPass: "",
-          userRole: "",
+          userRole: ""
           
         },
       },

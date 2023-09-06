@@ -85,8 +85,8 @@ export default createStore({
     
           if (results) {
             // If registration is successful, commit the user data to the store
-            console.log("User registered successfully:", results[0]);
-            context.commit("setUser", results[0]);
+            console.log("User registered successfully:", results);
+            context.commit("setUser", results);
           } else if (err) {
             // If there's an error during registration, commit the error message to the store
             console.log("Registration error:", err);
