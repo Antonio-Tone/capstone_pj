@@ -50,6 +50,10 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
+import addVehicle from "../components/addVehicleComp.vue";
+import addUser from "../components/AddUserComp.vue";
+import updateProduct from "../components/UpdateProductComp.vue";
+import updateUser from "@/components/UpdateUserComp.vue";
 export default { 
   components:{
 Spinner

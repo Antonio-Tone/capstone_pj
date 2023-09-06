@@ -30,13 +30,13 @@
             ></button>
           </div>
           <div class="modal-body">
-            <label for="productname">Vehicle Name:</label>
+            <label for="vehicleName">Vehicle Name:</label>
             <input
               required
               id="vehicleName"
               placeholder="vehicle Name"
               type="text"
-              v-model="model.car.vehicleName"
+              v-model="model.vehicle.vehicleName"
             />
             <label for="Brand">BRAND:</label>
             <input
@@ -44,15 +44,15 @@
               id="brand"
               placeholder="brand"
               type="number"
-              v-model="model.car.brand"
+              v-model="model.vehicle.brand"
             />
-            <label for="STOCK">QUANTITY:</label>
+            <label for="stock">QUANTITY:</label>
             <input
               required
               id="stock"
               placeholder="quantity"
               type="text"
-              v-model="model.car.inventory"
+              v-model="model.vehicle.inventory"
             />
             <label for="rating">RATING:</label>
             <input
@@ -60,7 +60,7 @@
               id="rating"
               placeholder="rating"
               type="number"
-              v-model="model.car.rating"
+              v-model="model.vehicle.rating"
             />
             <label for="speed">SPEED</label>
             <input
@@ -68,23 +68,47 @@
               id="speed"
               placeholder="max speed"
               type="text"
-              v-model="model.car.speed"
+              v-model="model.vehicle.speed"
             />
            
+            <label for="Model">model:</label>
+            <input
+              required
+              id="year"
+              placeholder="year"
+              type="text"
+              v-model="model.vehicle.year"
+            />
             <label for="imageUrl">vehicle Image:</label>
             <input
               required
               id="imageUrl"
               placeholder="Vehicle image"
               type="text"
-              v-model="model.car.vehicleURL"
+              v-model="model.vehicle.imageURL"
+            />
+            <label for="category">category:</label>
+            <input
+              required
+              id="imageUrl"
+              placeholder="suv/lux/supercar"
+              type="text"
+              v-model="model.vehicle.category"
+            />
+            <label for="category">rate:</label>
+            <input
+              required
+              id="rate"
+              placeholder="price/h"
+              type="number"
+              v-model="model.vehicle.rate"
             />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn" @click="createProduct">
+            <button type="button" class="btn" @click="addVehicle">
               Save changes
             </button>
           </div>
@@ -99,20 +123,23 @@ export default {
   data() {
     return {
       model: {
-        product: {
-          prodName: "",
-          quantity: "",
-          price: "",
+        Vehicle: {
+          VehicleName: "",
+          brand: "",
+          inventory: "",
+          rating: "",
+          speed: "",
+          year: "",
+          imageURL: "",
           category: "",
-          prodDesc: "",
-          prodUrl: "",
+          rate: "",
         },
       },
     };
   },
   methods: {
-    createProduct() {
-      this.$store.dispatch("createProduct", this.model.product);
+    addVehicle() {
+      this.$store.dispatch("addVehicle", this.model.vehicle);
     },
   },
 };

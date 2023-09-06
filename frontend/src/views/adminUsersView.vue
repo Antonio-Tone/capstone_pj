@@ -27,12 +27,12 @@
             <td>{{ user.userRole }}</td>
             <td>{{ user.emailAdd }}</td>
             <td>
-              <img
+             
                 :src="user.userProfile"
                 :alt="user.firstName"
                 loading="lazy"
                 class="img-fluid image"
-              />
+              /> -->
             </td>
             <td>
               <updateUser :user="user" /><button
