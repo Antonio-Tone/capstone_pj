@@ -50,13 +50,17 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
-import addVehicle from "../components/addVehicleComp.vue";
-import addUser from "../components/AddUserComp.vue";
-import updateProduct from "../components/UpdateProductComp.vue";
+import createVehicle from "@/components/addVehicleComp.vue";
+import createUser from "@/components/createUserComp.vue";
+import updateCar from "../components/updateVehiclecomp.vue";
 import updateUser from "@/components/UpdateUserComp.vue";
 export default { 
   components:{
-Spinner
+Spinner,
+createVehicle,
+createUser,
+updateCar,
+updateUser,
   },
   computed: {
     users() {

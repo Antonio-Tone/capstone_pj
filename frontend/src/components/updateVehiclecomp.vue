@@ -93,7 +93,7 @@
             <button
               type="button"
               class="btn"
-              @click="update(vehicle.vehicleID)"
+              @click="updateCar(vehicle.vehicleID)"
             >
               Save changes
             </button>
@@ -141,7 +141,7 @@ export default {
         ),
       };
     },
-    update(vehicleID) {
+    updateCar(vehicleID) {
       this.$store
         .dispatch("updateVehicle", {
           vehicleID: vehicleID,

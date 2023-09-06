@@ -108,7 +108,7 @@
             <button type="button" class="btn" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn" @click="addVehicle">
+            <button type="button" class="btn" @click="createVehicle">
               Save changes
             </button>
           </div>
@@ -138,7 +138,7 @@ export default {
     };
   },
   methods: {
-    addVehicle() {
+    createVehicle() {
       this.$store.dispatch("addVehicle", this.model.vehicle);
     },
   },

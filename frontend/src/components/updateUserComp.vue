@@ -91,7 +91,7 @@
             <button
               type="button"
               class="btn"
-              @click="update(user.userID)"
+              @click="updateUser(user.userID)"
             >
               Save changes
             </button>
@@ -137,7 +137,7 @@ export default {
         ...this.$store.state.users.find((user) => user.userID === id),
       };
     },
-    update(id) {
+    updateUser(id) {
       this.$store
         .dispatch("updateUser", {
           userID: id,
