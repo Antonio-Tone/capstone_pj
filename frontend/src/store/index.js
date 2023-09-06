@@ -75,9 +75,10 @@ export default createStore({
     },
    async registerUser(context, payload) {
       try {
+        console.log("Sending registration request with payload:", payload);
         // Send a POST request to the registration endpoint
         const response = await axios.post(`${miniURL}register`, payload);
-    
+        console.log("Received response from server:", response);
         // Check if the response status is successful (e.g., 200 OK)
         if (response.status === 200) {
           const { results, err } = response.data;
@@ -106,7 +107,7 @@ export default createStore({
     async updateUser(context, payload) {
       try {
         const { res } = await axios.patch(
-          `${miniURL}user/${payload.UserID}`,
+          `${miniURL}user/${payload.userID}`,
           payload
         );
         const { msg, err } = res.data;

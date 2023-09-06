@@ -36,12 +36,16 @@
                 />
               </td>
               <td>
-                <!-- <updateVehicle :vehicle="vehicle" /> -->
+
                 <button @click="deleteVehicle(car.vehicleID)" class="btn">
                   delete
                 </button>
+              
               </td>
             </tr>
+            <tr v-else>
+            <Spinner />
+          </tr>
           </tbody>
         </table>
     </div>
@@ -50,10 +54,10 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
-import createVehicle from "@/components/addVehicleComp.vue";
-import createUser from "@/components/createUserComp.vue";
+import createVehicle from "../components/addVehicleComp.vue";
+import createUser from "../components/addUserComp.vue";
 import updateCar from "../components/updateVehiclecomp.vue";
-import updateUser from "@/components/UpdateUserComp.vue";
+import updateUser from "../components/updateUserComp.vue";
 export default { 
   components:{
 Spinner,
@@ -64,11 +68,17 @@ updateUser,
   },
   computed: {
     users() {
-      return this.$store.state.users;
+      return this.$store.state.users || [];
     },
      vehicles() {
-      return this.$store.state.vehicles;
-    }
+      return this.$store.state.vehicles || [];
+    },
+    vehicle() {
+      return this.$store.state.vehicle || [];
+    },
+    user() {
+      return this.$store.state.user || [];
+    },
   },
   methods: {
      navigateToUsers() {
@@ -87,7 +97,25 @@ updateUser,
       this.$store.commit("setSingleVehicle", chosenVehicle);
       this.$router.push({ name: "Vehicle", params: { vehicleID: vehicleID } });
     },
+    deleteVehicle(vehicleID) {
+      if (confirm("Are you sure you want to remove this vehicle?")) {
+        this.$store.dispatch("deleteVehicle", vehicleID);
+        setTimeout(() => {
+          location.reload();
+        }, 500);
+      }
   },
+  deleteUser(id) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        this.$store.dispatch("deleteUser", id);
+        setTimeout(() => {
+          location.reload();
+        }, 500);
+      }
+    }
+
+},
+
   mounted() {
     this.$store.dispatch("fetchUsers");
     this.$store.dispatch("fetchVehicles");

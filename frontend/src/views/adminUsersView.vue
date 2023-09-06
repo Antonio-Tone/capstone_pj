@@ -3,6 +3,7 @@
       <button @click="navigateToCars">Vehicles</button>
         <h1>Users</h1>
     <div class="table-responsive">
+      <addUser/>
       <table class="table">
         <thead>
           <tr>
@@ -26,13 +27,7 @@
             <td>{{ user.gender }}</td>
             <td>{{ user.userRole }}</td>
             <td>{{ user.emailAdd }}</td>
-            <td>
-             
-                :src="user.userProfile"
-                :alt="user.firstName"
-                loading="lazy"
-                class="img-fluid image"
-              /> -->
+            <td>             
             </td>
             <td>
               <updateUser :user="user" /><button
@@ -54,9 +49,11 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
+import addUser from"../components/addUserComp.vue";
 export default {
      components:{
-Spinner
+Spinner,
+addUser
   },
   computed: {
     users() {

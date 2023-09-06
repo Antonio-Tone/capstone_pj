@@ -18,7 +18,7 @@
       aria-labelledby="exampleModal1Label"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog bg-dark">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">New Vehicle</h1>
@@ -29,7 +29,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body bg-dark">
             <label for="vehicleName">Vehicle Name:</label>
             <input
               required
@@ -105,10 +105,10 @@
             />
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn" data-bs-dismiss="modal">
+            <button type="button" class="btn bg-dark" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn" @click="createVehicle">
+            <button type="button" class="btn bg-dark" @click="createVehicle">
               Save changes
             </button>
           </div>
@@ -123,7 +123,7 @@ export default {
   data() {
     return {
       model: {
-        Vehicle: {
+        vehicle: {
           VehicleName: "",
           brand: "",
           inventory: "",

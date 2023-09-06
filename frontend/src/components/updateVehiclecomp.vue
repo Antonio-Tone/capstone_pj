@@ -19,7 +19,7 @@
       :aria-labelledby="'exampleModalLabel' + vehicle.prodID"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog bg-dark">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -32,7 +32,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body bg-dark">
             <label>Vehicle name:</label>
             <input
               placeholder="name"
@@ -114,7 +114,7 @@ export default {
       },
       updateVehicleID: null,
       model: {
-        product: {
+        vehicle: {
           vehicleName: "",
           brand: "",
           inventory: "",

@@ -3,7 +3,7 @@
     <!-- Button trigger modal -->
     <button
       type="button"
-      class="btn"
+      class="btn text-dark"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal3"
     >
@@ -18,7 +18,7 @@
       aria-labelledby="exampleModal3Label"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog bg-dark">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel1">New User</h1>
@@ -29,7 +29,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body bg-dark">
             <label for="firstName">First Name:</label>
             <input
               required
@@ -50,7 +50,7 @@
             <input
               required
               id="gender"
-              type="number"
+              type="text"
               placeholder="gender"
               v-model="model.user.gender"
             />
@@ -58,7 +58,7 @@
             <input
               required
               id="age"
-              type="text"
+              type="number"
               placeholder="age"
               v-model="model.user.age"
             />
@@ -67,7 +67,7 @@
               required
               id="email"
               type="text"
-              placeholder="role"
+              placeholder="email"
               v-model="model.user.emailAdd"
             />
             <label for="password">PASSWORD</label>
@@ -96,10 +96,10 @@
             /> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn" data-bs-dismiss="modal">
+            <button type="button" class="btn bg-dark" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn" @click="createUser">
+            <button type="button" class="btn bg-dark" @click="createUser">
               Save changes
             </button>
           </div>

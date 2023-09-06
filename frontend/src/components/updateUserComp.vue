@@ -3,7 +3,7 @@
     <!-- Button trigger modal -->
     <button
       type="button"
-      class="btn"
+      class="btn color-white"
       @click="openModal(user.userID)"
       data-bs-toggle="modal"
       :data-bs-target="'#texampleModal' + user.userID"
@@ -19,7 +19,7 @@
       :aria-labelledby="'texampleModalLabel' + user.userID"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog bg-dark">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="texampleModalLabel3">
@@ -32,7 +32,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body bg-dark">
             <label>userID:</label>
             <input type="text" placeholder="ID" v-model="updateUser.userID" />
             <label>first name:</label>
@@ -85,7 +85,7 @@
             /> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn" data-bs-dismiss="modal">
+            <button type="button" class="btn bg-dark" data-bs-dismiss="modal">
               Close
             </button>
             <button
