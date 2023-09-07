@@ -39,6 +39,7 @@
               <button @click="deleteVehicle(car.vehicleID)" class="btn">
                 delete
               </button>
+              <updateCar/>
             </td>
           </tr>
         </tbody>

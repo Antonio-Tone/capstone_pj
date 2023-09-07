@@ -27,7 +27,8 @@
             <td>{{ user.userRole }}</td>
             <td>{{ user.emailAdd }}</td>
             <td>
-              <updateUser :user="user" @userUpdated="refreshUsers" /><button
+              <updateUser :user="user" @userUpdated="refreshUsers" />
+              <button
                 class="btn"
                 @click="deleteUser(user.userID)"
               >

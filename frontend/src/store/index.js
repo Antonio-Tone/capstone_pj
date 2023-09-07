@@ -163,7 +163,7 @@ export default createStore({
     async updateVehicle(context, payload) {
       try {
         const res = await axios.patch(
-          `${miniURL}vehicle/${payload.prodID}`,
+          `${miniURL}vehicle/${payload.vehicleID}`,
           payload
         );
         const { msg, err } = res.data;
