@@ -77,8 +77,13 @@ export default {
         .dispatch("fetchUsers")
         .then(() => console.log("Reached successfully"));
     },
-    deleteUser(userID) {
-      this.$store.dispatch("deleteUser", userID);
+    deleteUser(id) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        this.$store.dispatch("deleteUser", id);
+        setTimeout(() => {
+          location.reload();
+        }, 500);
+      }
     },
     viewUser(userID) {
       const chosenUser = this.users.find((user) => user.userID === userID);

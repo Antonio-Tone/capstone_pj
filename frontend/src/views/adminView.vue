@@ -36,7 +36,7 @@
             </td>
             <td>
               <!-- <updateVehicle :vehicle="vehicle" /> -->
-              <button @click="deleteVehicle(car.vehicleID)" class="btn">
+              <button @click="removeVehicle(car.vehicleID)" class="btn">
                 delete
               </button>
               <updateCar :car="car"/>
@@ -82,14 +82,15 @@ export default {
       this.$store.commit("setSingleVehicle", chosenVehicle);
       this.$router.push({ name: "Vehicle", params: { vehicleID: vehicleID } });
     },
-    deleteVehicle(vehicleID) {
-      if (confirm("Are you sure you want to remove this vehicle?")) {
-        this.$store.dispatch("deleteVehicle", vehicleID);
+    removeVehicle(vehicleID) {
+      if (confirm("Are you sure you want to delete this vehicle?")) {
+        this.$store.dispatch("deleteVehicle", vehicleID)
         setTimeout(() => {
-          location.reload();
-        }, 500);
+          location.reload()
+        }, 500)
       }
-  },
+    },
+
   deleteUser(id) {
       if (confirm("Are you sure you want to delete this user?")) {
         this.$store.dispatch("deleteUser", id);
