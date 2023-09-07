@@ -2,10 +2,12 @@ import { createStore } from "vuex";
 import axios from "axios";
 import Cookies from 'js-cookie'; 
 const miniURL = "https://capstone-api-ec2a.onrender.com/";   
+import Swal from 'sweetalert2'
  //capstone-api-ec2a.onrender.com
 export default createStore({
   state: {
     users: null,
+    edit: null,
     user: null,
     vehicles: null,
     vehicle: null,
@@ -38,6 +40,9 @@ export default createStore({
     setMsg(state, msg) {
       state.msg = msg;
     },
+    setEdit(state, edit){
+      state.edit = edit
+    }
   },
   actions: {
     async fetchUsers(context) {
@@ -105,16 +110,23 @@ export default createStore({
     
     async updateUser(context, payload) {
       try {
-        const  res  = await axios.patch(
+        const res = await axios.patch(
           `${miniURL}user/${payload.userID}`,
-          payload
+          payload.data
         );
-        const { msg, err } = res.data;
-        if (msg) {
-          context.commit("setUser", msg);
+        const { err, msg } = res.data
+        if(err){
+          context.commit("setMsg", err)
         }
-        if (err) {
-          context.commit("setMsg", err);
+        if(msg === "User details were updated successfully"){
+          context.dispatch("fetchUsers")
+          context.commit("setEdit", msg)
+          Swal.fire({
+            icon: "success",
+            title:"User edited successfully",
+            text:"You have successfully updated your account details",
+            showConfirmButton: false
+          })
         }
       } catch (e) {
         context.commit("setMsg", "an error occured");

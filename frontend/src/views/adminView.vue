@@ -1,81 +1,76 @@
-<template >
-    <div>
-      <button @click="navigateToUsers">users</button>
-          <h1>vehicles</h1>
-          <createVehicle/>
+<template>
+  <div>
+    <button @click="navigateToUsers">users</button>
+    <h1>vehicles</h1>
+    <createVehicle />
     <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>VIN</th>
-              <th>NAME</th>
-              <th>BRAND</th>
-              <th>INVENTORY</th>
-              <th>RATING</th>
-              <th>MODEL</th>
-              <th>IMAGE</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-for="car in vehicles" :key="car.vehicleID">
-            <tr v-if="car">
-              <td>{{ car.vehicleID}}</td>
-              <td>{{ car.vehicleName}}</td>
-              <td>{{ car.brand }}</td>
-              <td>{{ car.inventory}}</td>
-              <td>{{ car.rating}}</td>
-              <td>{{ car.year}}</td>
-              
-              
-              
-              <td>
-                <img
-                  :src="car.imageURL"
-                  :alt="car.hoveredURL"
-                  class="img-fluid image"
-                  loading="lazy"
-                />
-              </td>
-              <td>
-                <!-- <updateVehicle :vehicle="vehicle" /> -->
-                <button @click="deleteVehicle(car.vehicleID)" class="btn">
-                  delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>VIN</th>
+            <th>NAME</th>
+            <th>BRAND</th>
+            <th>INVENTORY</th>
+            <th>RATING</th>
+            <th>MODEL</th>
+            <th>IMAGE</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody v-for="car in vehicles" :key="car.vehicleID">
+          <tr v-if="car">
+            <td>{{ car.vehicleID }}</td>
+            <td>{{ car.vehicleName }}</td>
+            <td>{{ car.brand }}</td>
+            <td>{{ car.inventory }}</td>
+            <td>{{ car.rating }}</td>
+            <td>{{ car.year }}</td>
+
+            <td>
+              <img
+                :src="car.imageURL"
+                :alt="car.hoveredURL"
+                class="img-fluid image"
+                loading="lazy"
+              />
+            </td>
+            <td>
+              <!-- <updateVehicle :vehicle="vehicle" /> -->
+              <button @click="deleteVehicle(car.vehicleID)" class="btn">
+                delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    </div>
-    
+  </div>
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
 import createVehicle from "../components/addVehicleComp.vue";
 import updateCar from "../components/updateVehiclecomp.vue";
 
-export default { 
-  components:{
-Spinner,
-createVehicle,
-updateCar,
-
+export default {
+  components: {
+    Spinner,
+    createVehicle,
+    updateCar,
   },
   computed: {
     users() {
       return this.$store.state.users;
     },
-     vehicles() {
+    vehicles() {
       return this.$store.state.vehicles;
-    }
+    },
   },
   methods: {
-     navigateToUsers() {
-       this.$router.push({ path:"/Users" })},
+    navigateToUsers() {
+      this.$router.push({ path: "/Users" });
+    },
     viewUser(userID) {
-      const chosenUser = this.users.find(
-        (user) => user.userID === userID
-      );
+      const chosenUser = this.users.find((user) => user.userID === userID);
       this.$store.commit("setUser", chosenUser);
       this.$router.push({ name: "User", params: { userID: userID } });
     },
@@ -91,16 +86,17 @@ updateCar,
     this.$store.dispatch("fetchUsers");
     this.$store.dispatch("fetchVehicles");
   },
-}
+};
 </script>
 <style>
-th,td,.btn{
+th,
+td,
+.btn {
   color: white;
 }
-.image{
+.image {
   height: 80px;
-border-radius: 20px;
-position: center !important;
+  border-radius: 20px;
+  position: center !important;
 }
-    
 </style>

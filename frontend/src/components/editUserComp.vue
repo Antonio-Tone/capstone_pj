@@ -39,44 +39,25 @@
             <input
               type="text"
               placeholder="first name"
-              v-model="updateUser.userName"
+              v-model="editUser.userName"
             />
             <label>last name:</label>
             <input
               type="text"
               placeholder="last name"
-              v-model="updateUser.lastName"
+              v-model="editUser.lastName"
             />
             <label>gender:</label>
-            <input
-              type="text"
-              placeholder="gender"
-              v-model="updateUser.gender"
-            />
+            <input type="text" placeholder="gender" v-model="editUser.gender" />
             <label>age:</label>
-            <input
-              type="number"
-              placeholder="age"
-              v-model="updateUser.age"
-            />
+            <input type="number" placeholder="age" v-model="editUser.age" />
             <label>email address:</label>
             <input
               type="email"
               placeholder="email address"
-              v-model="updateUser.emailAdd"
+              v-model="editUser.emailAdd"
             />
-            <label>password:</label>
-            <input
-              type="password"
-              placeholder="password"
-              v-model="updateUser.userPass"
-            />
-            <label>Role:</label>
-            <input
-              type="text"
-              placeholder="user role"
-              v-model="updateUser.userRole"
-            />
+            
             <!-- <label>user profile:</label>
             <input
               type="text"
@@ -88,11 +69,7 @@
             <button type="button" class="btn" data-bs-dismiss="modal">
               Close
             </button>
-            <button
-              type="button"
-              class="btn"
-              @click="updateUser(updateUser.userID)"
-            >
+            <button type="button" class="btn" @click="saveUser(user.userID)">
               Save changes
             </button>
           </div>
@@ -106,24 +83,23 @@
 export default {
   props: ["user"],
   data() {
-     return {
-    editedUserData: {
-      ...this.user,
-    },
-    updateUserID: null,
-    updatedUser: { // Change the name here
+    return {
+      editUser: {
+        ...this.user,
+      },
+      editUserID: null,
+model:{
+  user: {
+       userName: "",
+        lastName: "",
+        gender: "",
+        age: "",
+        emailAdd: "",
+        
+      },
+}
       
-      firstName: "",
-      lastName: "",
-      gender: "",
-      age: "",
-      emailAdd: "",
-      userPass: "",
-      userRole: "",
-    },
-  };
-
-
+    };
   },
   computed: {
     currentUser() {
@@ -131,34 +107,23 @@ export default {
     },
   },
   methods: {
-  openModal(id) {
-    console.log("reached");
-    this.updateUserID = id;
-    this.editedUserData = {
-      ...this.$store.state.users.find((user) => user.userID === id),
-    };
-  },
-  updateUser() {
-    const id = this.updateUserID; // Get the user ID
-    this.$store
-      .dispatch("updateUser", {
+    openModal(id) {
+      console.log("reached");
+      this.editUserID = id;
+    },
+  async saveUser(id) {
+    try {
+      await this.$store.dispatch("updateUser", {
         userID: id,
-        data: { ...this.updatedUser }, // Change the name here
-      })
-      .then(() => {
-        console.log("User updated!");
-      })
-      .catch((err) => {
-        console.error("Error updating: ", err);
+        data: { ...this.editUser },
       });
+    } catch (e) {
+      console.log(e);
+    }
   },
-},
+  }, 
 };
 </script>
-
-
-
-
 
 <style scoped>
 .btn {
