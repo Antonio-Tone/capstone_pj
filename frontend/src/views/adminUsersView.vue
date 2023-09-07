@@ -2,6 +2,7 @@
     <div>
       <button @click="navigateToCars">Vehicles</button>
         <h1>Users</h1>
+<createUser/>
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -27,14 +28,6 @@
             <td>{{ user.userRole }}</td>
             <td>{{ user.emailAdd }}</td>
             <td>
-             
-                :src="user.userProfile"
-                :alt="user.firstName"
-                loading="lazy"
-                class="img-fluid image"
-              /> -->
-            </td>
-            <td>
               <updateUser :user="user" /><button
                 class="btn"
                 @click="deleteUser(user.userID)"
@@ -42,6 +35,7 @@
                 delete
               </button>
             </td>
+              
           </tr>
           <tr v-else>
             <Spinner />
@@ -54,9 +48,13 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
+import createUser from "../components/addUserComp.vue";
+import updateUser from "../components/editUserComp.vue"
 export default {
      components:{
-Spinner
+Spinner,
+createUser,
+updateUser,
   },
   computed: {
     users() {

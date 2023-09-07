@@ -22,7 +22,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="texampleModalLabel3">
+            <h1 class="modal-title fs-5 bg-dark" id="texampleModalLabel3">
               Modal title
             </h1>
             <button
@@ -33,8 +33,8 @@
             ></button>
           </div>
           <div class="modal-body">
-            <label>userID:</label>
-            <input type="text" placeholder="ID" v-model="updateUser.userID" />
+            <!-- <label>userID:</label>
+            <input type="text" placeholder="ID" v-model="updateUser.userID" /> -->
             <label>first name:</label>
             <input
               type="text"
@@ -49,19 +49,19 @@
             />
             <label>gender:</label>
             <input
-              type="number"
+              type="text"
               placeholder="gender"
               v-model="updateUser.gender"
             />
             <label>age:</label>
             <input
-              type="text"
+              type="number"
               placeholder="age"
               v-model="updateUser.age"
             />
             <label>email address:</label>
             <input
-              type="text"
+              type="email"
               placeholder="email address"
               v-model="updateUser.emailAdd"
             />
@@ -91,7 +91,7 @@
             <button
               type="button"
               class="btn"
-              @click="updateUser(user.userID)"
+              @click="updateUser(updateUser.userID)"
             >
               Save changes
             </button>
@@ -106,23 +106,24 @@
 export default {
   props: ["user"],
   data() {
-    return {
-      updateUser: {
-        ...this.user,
-      },
-      updateUserID: null,
-      model: {
-        user: {
-          firstName: "",
-          lastName: "",
-          gender: "",
-          age: "",
-          emailAdd: "",
-          userPass: "",
-          userRole: "",
-        },
-      },
-    };
+     return {
+    editedUserData: {
+      ...this.user,
+    },
+    updateUserID: null,
+    updatedUser: { // Change the name here
+      
+      firstName: "",
+      lastName: "",
+      gender: "",
+      age: "",
+      emailAdd: "",
+      userPass: "",
+      userRole: "",
+    },
+  };
+
+
   },
   computed: {
     currentUser() {
@@ -130,29 +131,34 @@ export default {
     },
   },
   methods: {
-    openModal(id) {
-      console.log("reached");
-      this.updateUserID = id;
-      this.updateUser = {
-        ...this.$store.state.users.find((user) => user.userID === id),
-      };
-    },
-    updateUser(id) {
-      this.$store
-        .dispatch("updateUser", {
-          userID: id,
-          data: { ...this.updateUser },
-        })
-        .then(() => {
-          console.log("User updated!");
-        })
-        .catch((err) => {
-          console.error("Error updating: ", err);
-        });
-    },
+  openModal(id) {
+    console.log("reached");
+    this.updateUserID = id;
+    this.editedUserData = {
+      ...this.$store.state.users.find((user) => user.userID === id),
+    };
   },
+  updateUser() {
+    const id = this.updateUserID; // Get the user ID
+    this.$store
+      .dispatch("updateUser", {
+        userID: id,
+        data: { ...this.updatedUser }, // Change the name here
+      })
+      .then(() => {
+        console.log("User updated!");
+      })
+      .catch((err) => {
+        console.error("Error updating: ", err);
+      });
+  },
+},
 };
 </script>
+
+
+
+
 
 <style scoped>
 .btn {

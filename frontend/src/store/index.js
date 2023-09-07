@@ -105,8 +105,8 @@ export default createStore({
     
     async updateUser(context, payload) {
       try {
-        const { res } = await axios.patch(
-          `${miniURL}user/${payload.UserID}`,
+        const  res  = await axios.patch(
+          `${miniURL}user/${payload.userID}`,
           payload
         );
         const { msg, err } = res.data;
@@ -120,9 +120,9 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
-    async deleteUser(context, UserID) {
+    async deleteUser(context, userID) {
       try {
-        const res = await axios.delete(`${miniURL}user/${UserID}`);
+        const res = await axios.delete(`${miniURL}user/${userID}`);
         if (res.status === 200) {
           context.commit("setUser", res.data.msg);
         } else {

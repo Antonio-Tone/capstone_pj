@@ -2,6 +2,7 @@
     <div>
       <button @click="navigateToUsers">users</button>
           <h1>vehicles</h1>
+          <createVehicle/>
     <div class="table-responsive">
         <table class="table">
           <thead>
@@ -50,17 +51,15 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
-import createVehicle from "@/components/addVehicleComp.vue";
-import createUser from "@/components/createUserComp.vue";
+import createVehicle from "../components/addVehicleComp.vue";
 import updateCar from "../components/updateVehiclecomp.vue";
-import updateUser from "@/components/UpdateUserComp.vue";
+
 export default { 
   components:{
 Spinner,
 createVehicle,
-createUser,
 updateCar,
-updateUser,
+
   },
   computed: {
     users() {

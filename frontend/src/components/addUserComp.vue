@@ -50,7 +50,7 @@
             <input
               required
               id="gender"
-              type="number"
+              type="text"
               placeholder="gender"
               v-model="model.user.gender"
             />
@@ -58,7 +58,7 @@
             <input
               required
               id="age"
-              type="text"
+              type="number"
               placeholder="age"
               v-model="model.user.age"
             />

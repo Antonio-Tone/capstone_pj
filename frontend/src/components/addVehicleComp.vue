@@ -30,10 +30,10 @@
             ></button>
           </div>
           <div class="modal-body">
-            <label for="vehicleName">Vehicle Name:</label>
+            <label for="name">Vehicle Name:</label>
             <input
               required
-              id="vehicleName"
+              id="name"
               placeholder="vehicle Name"
               type="text"
               v-model="model.vehicle.vehicleName"
@@ -43,7 +43,7 @@
               required
               id="brand"
               placeholder="brand"
-              type="number"
+              type="text"
               v-model="model.vehicle.brand"
             />
             <label for="stock">QUANTITY:</label>
@@ -51,7 +51,7 @@
               required
               id="stock"
               placeholder="quantity"
-              type="text"
+              type="number"
               v-model="model.vehicle.inventory"
             />
             <label for="rating">RATING:</label>
@@ -67,7 +67,7 @@
               required
               id="speed"
               placeholder="max speed"
-              type="text"
+              type="number"
               v-model="model.vehicle.speed"
             />
            
@@ -90,12 +90,12 @@
             <label for="category">category:</label>
             <input
               required
-              id="imageUrl"
+              id="category"
               placeholder="suv/lux/supercar"
               type="text"
               v-model="model.vehicle.category"
             />
-            <label for="category">rate:</label>
+            <label for="rate">rate:</label>
             <input
               required
               id="rate"
@@ -123,8 +123,8 @@ export default {
   data() {
     return {
       model: {
-        Vehicle: {
-          VehicleName: "",
+        vehicle: {
+          vehicleName: "",
           brand: "",
           inventory: "",
           rating: "",
