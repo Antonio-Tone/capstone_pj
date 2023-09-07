@@ -22,7 +22,7 @@
       <div class="modal-dialog bg-dark">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="texampleModalLabel3">
+            <h1 class="modal-title fs-5 bg-dark" id="texampleModalLabel3">
               Modal title
             </h1>
             <button
@@ -32,51 +32,38 @@
               aria-label="Close"
             ></button>
           </div>
+<<<<<<< HEAD:frontend/src/components/updateUserComp.vue
           <div class="modal-body bg-dark">
             <label>userID:</label>
             <input type="text" placeholder="ID" v-model="updateUser.userID" />
+=======
+          <div class="modal-body">
+            <!-- <label>userID:</label>
+            <input type="text" placeholder="ID" v-model="updateUser.userID" /> -->
+>>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7:frontend/src/components/editUserComp.vue
             <label>first name:</label>
             <input
               type="text"
               placeholder="first name"
-              v-model="updateUser.userName"
+              v-model="editUser.userName"
             />
             <label>last name:</label>
             <input
               type="text"
               placeholder="last name"
-              v-model="updateUser.lastName"
+              v-model="editUser.lastName"
             />
             <label>gender:</label>
-            <input
-              type="number"
-              placeholder="gender"
-              v-model="updateUser.gender"
-            />
+            <input type="text" placeholder="gender" v-model="editUser.gender" />
             <label>age:</label>
-            <input
-              type="text"
-              placeholder="age"
-              v-model="updateUser.age"
-            />
+            <input type="number" placeholder="age" v-model="editUser.age" />
             <label>email address:</label>
             <input
-              type="text"
+              type="email"
               placeholder="email address"
-              v-model="updateUser.emailAdd"
+              v-model="editUser.emailAdd"
             />
-            <label>password:</label>
-            <input
-              type="password"
-              placeholder="password"
-              v-model="updateUser.userPass"
-            />
-            <label>Role:</label>
-            <input
-              type="text"
-              placeholder="user role"
-              v-model="updateUser.userRole"
-            />
+            
             <!-- <label>user profile:</label>
             <input
               type="text"
@@ -88,11 +75,7 @@
             <button type="button" class="btn bg-dark" data-bs-dismiss="modal">
               Close
             </button>
-            <button
-              type="button"
-              class="btn"
-              @click="updateUser(user.userID)"
-            >
+            <button type="button" class="btn" @click="saveUser(user.userID)">
               Save changes
             </button>
           </div>
@@ -107,21 +90,21 @@ export default {
   props: ["user"],
   data() {
     return {
-      updateUser: {
+      editUser: {
         ...this.user,
       },
-      updateUserID: null,
-      model: {
-        user: {
-          firstName: "",
-          lastName: "",
-          gender: "",
-          age: "",
-          emailAdd: "",
-          userPass: "",
-          userRole: "",
-        },
+      editUserID: null,
+model:{
+  user: {
+       userName: "",
+        lastName: "",
+        gender: "",
+        age: "",
+        emailAdd: "",
+        
       },
+}
+      
     };
   },
   computed: {
@@ -132,25 +115,19 @@ export default {
   methods: {
     openModal(id) {
       console.log("reached");
-      this.updateUserID = id;
-      this.updateUser = {
-        ...this.$store.state.users.find((user) => user.userID === id),
-      };
+      this.editUserID = id;
     },
-    updateUser(id) {
-      this.$store
-        .dispatch("updateUser", {
-          userID: id,
-          data: { ...this.updateUser },
-        })
-        .then(() => {
-          console.log("User updated!");
-        })
-        .catch((err) => {
-          console.error("Error updating: ", err);
-        });
-    },
+  async saveUser(id) {
+    try {
+      await this.$store.dispatch("updateUser", {
+        userID: id,
+        data: { ...this.editUser },
+      });
+    } catch (e) {
+      console.log(e);
+    }
   },
+  }, 
 };
 </script>
 

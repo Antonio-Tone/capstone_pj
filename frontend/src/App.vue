@@ -4,7 +4,7 @@
     <router-link to="/Vehicles">Vehicles</router-link>
    <router-link to="/Login">Login</router-link>
     <router-link to="/Register">Register</router-link>
-    <router-link to="/Admin">Admin</router-link>
+    <router-link to="/admin">Admin</router-link>
     
   </nav>
   <router-view/>

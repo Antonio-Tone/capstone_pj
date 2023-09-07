@@ -4,9 +4,9 @@
     <button
       type="button"
       class="btn"
-      @click="openModal(vehicle.vehicleID)"
+      @click="openModal(car.vehicleID)"
       data-bs-toggle="modal"
-      :data-bs-target="'#exampleModal' + vehicle.prodID"
+      :data-bs-target="'#exampleModal' + car.vehicleID"
     >
       edit
     </button>
@@ -14,9 +14,9 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      :id="'exampleModal' + vehicle.prodID"
+      :id="'exampleModal' + car.vehicleID"
       tabindex="-1"
-      :aria-labelledby="'exampleModalLabel' + vehicle.prodID"
+      :aria-labelledby="'exampleModalLabel' + car.vehicleID"
       aria-hidden="true"
     >
       <div class="modal-dialog bg-dark">
@@ -93,7 +93,7 @@
             <button
               type="button"
               class="btn"
-              @click="updateCar(vehicle.vehicleID)"
+              @click="updateCar(car.vehicleID)"
             >
               Save changes
             </button>
@@ -106,15 +106,19 @@
 
 <script>
 export default {
-  props: ["vehicle"],
+  props: ["car"],
   data() {
     return {
       updateVehicle: {
-        ...this.vehicle,
+        ...this.car,
       },
       updateVehicleID: null,
       model: {
+<<<<<<< HEAD
         vehicle: {
+=======
+        car: {
+>>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
           vehicleName: "",
           brand: "",
           inventory: "",
@@ -137,23 +141,24 @@ export default {
       this.updateVehicleID = vehicleID;
       this.updateVehicle = {
         ...this.$store.state.vehicles.find(
-          (vehicle) => vehicle.vehicleID === vehicleID
+          (car) => car.vehicleID === vehicleID
         ),
       };
     },
-    updateCar(vehicleID) {
-      this.$store
-        .dispatch("updateVehicle", {
-          vehicleID: vehicleID,
-          ...this.updateVehicle,
-        })
-        .then(() => {
-          console.log("Vehicle record updated!");
-        })
-        .catch((err) => {
-          console.error("Error updating: ", err);
-        });
-    },
+    updateCar() {
+  const vehicleID = this.updateVehicleID;
+  this.$store
+    .dispatch("updateVehicle", {
+      vehicleID: vehicleID,
+      ...this.updateVehicle,
+    })
+    .then(() => {
+      console.log("Vehicle record updated!");
+    })
+    .catch((err) => {
+      console.error("Error updating: ", err);
+    });
+},
   },
 };
 </script>
