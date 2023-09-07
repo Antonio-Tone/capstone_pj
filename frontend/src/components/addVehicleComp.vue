@@ -29,13 +29,8 @@
               aria-label="Close"
             ></button>
           </div>
-<<<<<<< HEAD
-          <div class="modal-body bg-dark">
-            <label for="vehicleName">Vehicle Name:</label>
-=======
           <div class="modal-body">
             <label for="name">Vehicle Name:</label>
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
             <input
               required
               id="name"
@@ -129,11 +124,7 @@ export default {
     return {
       model: {
         vehicle: {
-<<<<<<< HEAD
-          VehicleName: "",
-=======
           vehicleName: "",
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
           brand: "",
           inventory: "",
           rating: "",

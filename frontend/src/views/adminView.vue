@@ -4,53 +4,6 @@
     <h1>vehicles</h1>
     <createVehicle />
     <div class="table-responsive">
-<<<<<<< HEAD
-        <table class="table">
-          <thead>
-            <tr>
-              <th>VIN</th>
-              <th>NAME</th>
-              <th>BRAND</th>
-              <th>INVENTORY</th>
-              <th>RATING</th>
-              <th>MODEL</th>
-              <th>IMAGE</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-for="car in vehicles" :key="car.vehicleID">
-            <tr v-if="car">
-              <td>{{ car.vehicleID}}</td>
-              <td>{{ car.vehicleName}}</td>
-              <td>{{ car.brand }}</td>
-              <td>{{ car.inventory}}</td>
-              <td>{{ car.rating}}</td>
-              <td>{{ car.year}}</td>
-              
-              
-              
-              <td>
-                <img
-                  :src="car.imageURL"
-                  :alt="car.hoveredURL"
-                  class="img-fluid image"
-                  loading="lazy"
-                />
-              </td>
-              <td>
-
-                <button @click="deleteVehicle(car.vehicleID)" class="btn">
-                  delete
-                </button>
-              
-              </td>
-            </tr>
-            <tr v-else>
-            <Spinner />
-          </tr>
-          </tbody>
-        </table>
-=======
       <table class="table">
         <thead>
           <tr>
@@ -86,30 +39,17 @@
               <button @click="deleteVehicle(car.vehicleID)" class="btn">
                 delete
               </button>
-              <updateCar/>
+              <updateCar :car="car"/>
             </td>
           </tr>
         </tbody>
       </table>
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
     </div>
   </div>
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
 import createVehicle from "../components/addVehicleComp.vue";
-<<<<<<< HEAD
-import createUser from "../components/addUserComp.vue";
-import updateCar from "../components/updateVehiclecomp.vue";
-import updateUser from "../components/updateUserComp.vue";
-export default { 
-  components:{
-Spinner,
-createVehicle,
-createUser,
-updateCar,
-updateUser,
-=======
 import updateCar from "../components/updateVehiclecomp.vue";
 
 export default {
@@ -117,25 +57,13 @@ export default {
     Spinner,
     createVehicle,
     updateCar,
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
   },
   computed: {
     users() {
       return this.$store.state.users || [];
     },
-<<<<<<< HEAD
-     vehicles() {
-      return this.$store.state.vehicles || [];
-    },
-    vehicle() {
-      return this.$store.state.vehicle || [];
-    },
-    user() {
-      return this.$store.state.user || [];
-=======
     vehicles() {
       return this.$store.state.vehicles;
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
     },
   },
   methods: {

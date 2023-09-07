@@ -162,14 +162,17 @@ export default createStore({
       }
     },
     async updateVehicle(context, payload) {
+      console.log(payload)
       try {
         const res = await axios.patch(
           `${miniURL}vehicle/${payload.vehicleID}`,
-g          payload
+         payload,
         );
         const { msg, err } = res.data;
         if (msg) {
+          context.dispatch("fetchVehicles")
           context.commit("setVehicle", msg);
+          context.commit("setMsg", "Successfully updated vehicle");
         }
         if (err) {
           context.commit("setMsg", err);

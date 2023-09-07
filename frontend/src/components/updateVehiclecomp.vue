@@ -6,7 +6,7 @@
       class="btn"
       @click="openModal(car.vehicleID)"
       data-bs-toggle="modal"
-      :data-bs-target="'#exampleModal' + car.vehicleID"
+      :data-bs-target="'#exampleModal' + updatedVehicleID"
     >
       edit
     </button>
@@ -14,9 +14,9 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      :id="'exampleModal' + car.vehicleID"
+      :id="'exampleModal' + updatedVehicleID"
       tabindex="-1"
-      :aria-labelledby="'exampleModalLabel' + car.vehicleID"
+      :aria-labelledby="'exampleModalLabel' + updatedVehicleID"
       aria-hidden="true"
     >
       <div class="modal-dialog bg-dark">
@@ -37,49 +37,49 @@
             <input
               placeholder="name"
               type="text"
-              v-model="updateVehicle.vehicleName"
+              v-model="updated.vehicleName"
             />
             <label>brand:</label>
             <input
               placeholder="BRAND"
               type="TEXT"
-              v-model="updateVehicle.brand"
+              v-model="updated.brand"
             />
             <label>quantity:</label>
             <input
               placeholder="quantity"
               type="number"
-              v-model="updateVehicle.inventory"
+              v-model="updated.inventory"
             />
             <label>rating:</label>
             <input
               placeholder="rating"
               type="number"
-              v-model="updateVehicle.rating"
+              v-model="updated.rating"
             />
             <label>model:</label>
             <input
               placeholder="year"
               type="text"
-              v-model="updateVehicle.year"
+              v-model="updated.year"
             />
             <label>Vehicle image:</label>
             <input
               placeholder="image"
               type="text"
-              v-model="updateVehicle.imageURL"
+              v-model="updated.imageURL"
             />
             <label>category:</label>
             <input
               placeholder="category"
               type="text"
-              v-model="updateVehicle.category" 
+              v-model="updated.category" 
             />
             <label>rate:</label>
             <input
               placeholder="price/h"
               type="text"
-              v-model="updateVehicle.rate"
+              v-model="updated.rate"
             />
           </div>
           <div class="modal-footer">
@@ -109,16 +109,12 @@ export default {
   props: ["car"],
   data() {
     return {
-      updateVehicle: {
+      updated: {
         ...this.car,
       },
-      updateVehicleID: null,
+      updatedVehicleID: null,
       model: {
-<<<<<<< HEAD
-        vehicle: {
-=======
         car: {
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
           vehicleName: "",
           brand: "",
           inventory: "",
@@ -138,19 +134,20 @@ export default {
   },
   methods: {
     openModal(vehicleID) {
-      this.updateVehicleID = vehicleID;
-      this.updateVehicle = {
+      console.log(vehicleID, "id was found")
+      this.updatedVehicleID = vehicleID;
+      this.updated = {
         ...this.$store.state.vehicles.find(
           (car) => car.vehicleID === vehicleID
         ),
       };
     },
     updateCar() {
-  const vehicleID = this.updateVehicleID;
+  const vehicleID = this.updatedVehicleID;
   this.$store
     .dispatch("updateVehicle", {
       vehicleID: vehicleID,
-      ...this.updateVehicle,
+      ...this.updated,
     })
     .then(() => {
       console.log("Vehicle record updated!");

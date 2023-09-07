@@ -27,16 +27,9 @@
             <td>{{ user.gender }}</td>
             <td>{{ user.userRole }}</td>
             <td>{{ user.emailAdd }}</td>
-<<<<<<< HEAD
-            <td>             
-            </td>
-            <td>
-              <updateUser :user="user" /><button
-=======
             <td>
               <updateUser :user="user" @userUpdated="refreshUsers" />
               <button
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
                 class="btn"
                 @click="deleteUser(user.userID)"
               >
@@ -54,13 +47,6 @@
 </template>
 <script>
 import Spinner from "../components/SpinnerComp.vue";
-<<<<<<< HEAD
-import addUser from"../components/addUserComp.vue";
-export default {
-     components:{
-Spinner,
-addUser
-=======
 import createUser from "../components/addUserComp.vue";
 import updateUser from "../components/editUserComp.vue";
 export default {
@@ -73,7 +59,6 @@ export default {
     Spinner,
     createUser,
     updateUser,
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7
   },
   computed: {
     users() {

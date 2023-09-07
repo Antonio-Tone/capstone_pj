@@ -32,15 +32,9 @@
               aria-label="Close"
             ></button>
           </div>
-<<<<<<< HEAD:frontend/src/components/updateUserComp.vue
-          <div class="modal-body bg-dark">
-            <label>userID:</label>
-            <input type="text" placeholder="ID" v-model="updateUser.userID" />
-=======
           <div class="modal-body">
             <!-- <label>userID:</label>
             <input type="text" placeholder="ID" v-model="updateUser.userID" /> -->
->>>>>>> f03033efdfc94bcca52cc1ee10929fb2de1d06f7:frontend/src/components/editUserComp.vue
             <label>first name:</label>
             <input
               type="text"
