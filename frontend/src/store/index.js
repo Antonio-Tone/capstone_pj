@@ -169,10 +169,17 @@ export default createStore({
          payload,
         );
         const { msg, err } = res.data;
-        if (msg) {
+        if(err){
+          context.commit("setMsg", err)}
+        if(msg === "vehicle record udpated successfully"){
           context.dispatch("fetchVehicles")
-          context.commit("setVehicle", msg);
-          context.commit("setMsg", "Successfully updated vehicle");
+          context.commit("setVehicle", msg)
+          Swal.fire({
+            icon: "success",
+            title:"vehicle record updated successfully",
+            text:"You have successfully updated your vehicle record",
+            showConfirmButton: false
+          })
         }
         if (err) {
           context.commit("setMsg", err);
