@@ -1,14 +1,17 @@
 <template>
     <div>
-        <singleCar/>
+        {{ car}}
     </div>
 </template>
 
 <script>
-import singleCar from '../components/singleVehicleComp.vue';
     export default {
+        computed:{
+            car(){
+                return this.$store.state.viewedVehicle
+            }
+        },
         components:{
-            singleCar
         }
     }
 </script>

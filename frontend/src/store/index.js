@@ -14,7 +14,7 @@ export default createStore({
     spinner: null,
     token: null,
     msg: null,
-    chosenVehicle: null,
+    viewedVehicle: null,
   },
   getters: {},
   mutations: {
@@ -22,7 +22,7 @@ export default createStore({
       state.users = users;
     },
     setSingleVehicle(state, vehicle) {
-      state.chosenVehicle = vehicle;
+      state.viewedVehicle = vehicle;
     },
     setUser(state, user) {
       state.user = user;
@@ -42,7 +42,19 @@ export default createStore({
     },
     setEdit(state, edit){
       state.edit = edit
-    }
+    },
+    setUserData(state, cresult) {
+      state.cresult = cresult;
+      if (cresult && cresult.userRole) {
+        state.userRole = cresult.userRole;
+        localStorage.setItem("cresult", JSON.stringify(cresult));
+        console.log(cresult, cresult.userRole);
+      } else {
+        state.cresult = null;
+        state.userRole = null;
+        localStorage.removeItem("cresult");
+      }
+    },
   },
   actions: {
     async fetchUsers(context) {
@@ -107,6 +119,12 @@ export default createStore({
         console.error("An error occurred during registration:", error);
         context.commit("setMsg", "An error occurred during registration. Please try again.");
       }
+    },
+    async logout(context) {
+      context.commit("setToken", null);
+      context.commit("setUser", null);
+      context.commit("setUserData", null);
+      Cookies.remove("authorization");
     },
     
     async updateUser(context, payload) {
