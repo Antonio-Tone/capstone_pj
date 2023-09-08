@@ -75,11 +75,8 @@ class Users {
       userPass: data.userPass,
     };
   
-    const checkQuery = `
-      SELECT COUNT(*) AS count FROM users WHERE emailAdd = ${user.emailAdd}
-    `;
-  
-    db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
+   const checkQuery = "SELECT COUNT(*) AS count FROM users WHERE emailAdd = ?";
+db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
       if (checkErr) {
         throw checkErr;
       }
