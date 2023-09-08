@@ -84,10 +84,10 @@ db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
       if (checkResults[0].count > 0) {
         console.log(msg);
         // Email address is already in use
-        res.status(400).json({
-          status: 400,
-          msg: "Email address is already in use.",
-        });
+        res.json({
+            status: res.statusCode,
+            msg: "User registered successfully!",
+          });
       } else {
         const insertQuery = `
           INSERT INTO users SET ?
