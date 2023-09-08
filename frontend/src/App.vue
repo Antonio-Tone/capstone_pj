@@ -1,16 +1,11 @@
 <template>
 <div>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/Vehicles">Vehicles</router-link>
-   <router-link to="/Login">Login</router-link>
-    <router-link to="/Register">Register</router-link>
-    <router-link to="/admin">Admin</router-link>
-    
-  </nav>
-  <router-view/>
-  </div>
+  <NavBarComp/>
+ <router-view/>
+ </div>
 </template>
+
+
 
 <style>
 #app {
@@ -19,7 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: rgb(44, 62, 80);
-background: rgb(33, 33, 33) !important;
+  background: rgb(33, 33, 33) !important;
   min-height: 100vh;
 }
 
@@ -38,7 +33,18 @@ nav a.router-link-exact-active {
 </style>
 
 <script>
+  import NavBarComp from './components/nabarComp.vue';
 export default {
+   components: {
+    NavBarComp
+  },
+  computed: {
+    user(){
+      const user = this.$store.state.user
+      console.log(user)
+      return user
+    }
+  },
   
-}
+};
 </script>
