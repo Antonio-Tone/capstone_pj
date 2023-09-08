@@ -86,6 +86,7 @@ db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
         res.status(400).json({
           status: 400,
           msg: "Email address is already in use.",
+          console.log(msg);
         });
       } else {
         const insertQuery = `
