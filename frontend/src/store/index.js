@@ -123,7 +123,7 @@ export default createStore({
     async logout(context) {
       context.commit("setToken", null);
       context.commit("setUser", null);
-      context.commit("setUserData", null);
+      context.commit("setUserDatagit ", null);
       Cookies.remove("authorization");
     },
     
