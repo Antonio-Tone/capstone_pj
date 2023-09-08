@@ -1,9 +1,9 @@
 import { createStore } from "vuex";
 import axios from "axios";
-import Cookies from 'js-cookie'; 
-const miniURL = "https://capstone-api-ec2a.onrender.com/";   
-import Swal from 'sweetalert2'
- //capstone-api-ec2a.onrender.com
+import Cookies from "js-cookie";
+const miniURL = "https://capstone-api-ec2a.onrender.com/";
+import Swal from "sweetalert2";
+import router from "../router";
 export default createStore({
   state: {
     users: null,
@@ -40,8 +40,8 @@ export default createStore({
     setMsg(state, msg) {
       state.msg = msg;
     },
-    setEdit(state, edit){
-      state.edit = edit
+    setEdit(state, edit) {
+      state.edit = edit;
     },
     setUserData(state, cresult) {
       state.cresult = cresult;
@@ -74,11 +74,11 @@ export default createStore({
       }
     },
     async fetchVehicles(context) {
-      try{
+      try {
         const { data } = await axios.get(`${miniURL}Vehicles`);
         context.commit("setVehicles", data.results);
       } catch (e) {
-        context.commit("setMsg", "an" + e.message)
+        context.commit("setMsg", "an" + e.message);
       }
     },
     async fetchVehicle(context) {
@@ -90,62 +90,83 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
-   async registerUser(context, payload) {
+    async registerUser(context, payload) {
       try {
-        console.log("Sending registration request with payload:", payload);
+        console.log(payload);
         // Send a POST request to the registration endpoint
         const response = await axios.post(`${miniURL}register`, payload);
         console.log("Received response from server:", response);
-        // Check if the response status is successful (e.g., 200 OK)
-        if (response.status === 200) {
-          const { results, err } = response.data;
-    
-          if (results) {
-            // If registration is successful, commit the user data to the store
-            console.log("User registered successfully:", results);
-            context.commit("setUser", results);
-          } else if (err) {
-            // If there's an error during registration, commit the error message to the store
-            console.log("Registration error:", err);
-            context.commit("setMsg", err);
-          }
-        } else {
-          // Handle non-successful response status (e.g., display an error message)
-          console.error(`Registration request failed with status ${response.status}`);
-          context.commit("setMsg", "Registration failed. Please try again.");
+
+        const { err, msg } = response.data;
+
+        if (err) {
+          context.commit("setMsg", err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: err,
+            showConfirmButton: false,
+          });
+        } else if (msg === "User registered successfully!") {
+          console.log("User registered successfully");
+          Swal.fire({
+            icon: "success",
+            title: "registered successfully",
+            text: "please use you details to login",
+            showConfirmButton: false,
+          });
+
+          router.push("/login");
+        } else if (msg === "Email address is already in use.") {
+          Swal.fire({
+            icon: "error",
+            title: "Email address is already in use.",
+            text: "Please enter a different email address",
+            showConfirmButton: false,
+          });
         }
       } catch (error) {
         // Handle any errors that occur during the request
         console.error("An error occurred during registration:", error);
-        context.commit("setMsg", "An error occurred during registration. Please try again.");
+        context.commit(
+          "setMsg",
+          "An error occurred during registration. Please try again."
+        );
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred during registration. Please try again.",
+          showConfirmButton: false,
+        });
       }
     },
+
     async logout(context) {
       context.commit("setToken", null);
       context.commit("setUser", null);
-      context.commit("setUserDatagit ", null);
+      context.commit("Data", null);
       Cookies.remove("authorization");
     },
-    
+
     async updateUser(context, payload) {
       try {
         const res = await axios.patch(
           `${miniURL}user/${payload.userID}`,
           payload.data
         );
-        const { err, msg } = res.data
-        if(err){
-          context.commit("setMsg", err)
+        const { err, msg } = res.data;
+        if (err) {
+          context.commit("setMsg", err);
         }
-        if(msg === "User details were updated successfully"){
-          context.dispatch("fetchUsers")
-          context.commit("setEdit", msg)
+        if (msg === "User details were updated successfully") {
+          context.dispatch("fetchUsers");
+          context.commit("setEdit", msg);
           Swal.fire({
             icon: "success",
-            title:"User edited successfully",
-            text:"You have successfully updated your account details",
-            showConfirmButton: false
-          })
+            title: "User edited successfully",
+            text: "You have successfully updated your account details",
+            showConfirmButton: false,
+          });
         }
       } catch (e) {
         context.commit("setMsg", "an error occured");
@@ -180,24 +201,25 @@ export default createStore({
       }
     },
     async updateVehicle(context, payload) {
-      console.log(payload)
+      console.log(payload);
       try {
         const res = await axios.patch(
           `${miniURL}vehicle/${payload.vehicleID}`,
-         payload,
+          payload
         );
         const { msg, err } = res.data;
-        if(err){
-          context.commit("setMsg", err)}
-        if(msg === "vehicle record udpated successfully"){
-          context.dispatch("fetchVehicles")
-          context.commit("setVehicle", msg)
+        if (err) {
+          context.commit("setMsg", err);
+        }
+        if (msg === "vehicle record udpated successfully") {
+          context.dispatch("fetchVehicles");
+          context.commit("setVehicle", msg);
           Swal.fire({
             icon: "success",
-            title:"vehicle record updated successfully",
-            text:"You have successfully updated your vehicle record",
-            showConfirmButton: false
-          })
+            title: "vehicle record updated successfully",
+            text: "You have successfully updated your vehicle record",
+            showConfirmButton: false,
+          });
         }
         if (err) {
           context.commit("setMsg", err);
@@ -220,42 +242,65 @@ export default createStore({
       }
     },
     async login(context, payload) {
-      try{
-        const res = await axios.post(`${miniURL}login`, payload,)
-        const expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 7);
-        console.log(res.data);
-        const { msg, token, cresult } = await res.data
-        console.log(cresult)
-        if(msg === "You are providing the wrong email"){
+      try {
+        const res = await axios.post(`${miniURL}login`, payload);
+        const { msg, token, cresult } = res.data;
+
+        if (msg === "You are providing the wrong email") {
           context.commit("setMsg", "You are providing the wrong email");
-        }
-        if(msg === "Logged in!"){
-          context.commit("setUser", cresult)
-          context.commit("setToken", token)
+        } else if (msg === "Logged in!") {
+          await Swal.fire({
+            icon: "success",
+            title: "Logged in Successfully",
+            text: `You are now logged in! Welcome, ${cresult.userName}.`,
+          });
+          console.log(cresult);
+          context.commit("setUser", cresult);
+          localStorage.setItem("Data", JSON.stringify(cresult));
+          localStorage.setItem("Token", token);
+          context.commit("setToken", token);
           Cookies.set("authorization", context.state.token, {
-            expires: 1
-          })
-        } else{
-          context.commit("setMsg", err)
-          console.error("Something went wrong while logging in")
+            expires: 1,
+          });
+        } else {
+          context.commit("setMsg", "Something went wrong while logging in");
+          console.error("Something went wrong while logging in", msg);
         }
-      } catch(error) {
-        throw error
+      } catch (error) {
+        // Handle specific errors here, e.g., axios errors
+        console.error("Error during login:", error);
+        throw error;
       }
     },
-    async check(context){
-      const token = Cookies.get("authorization")
-      if(token){
-        context.commit("setToken", token)
-      } else{
-        context.commit("setUser", null)
-        router.push('/login')
+    async check(context) {
+      const token = Cookies.get("authorization");
+      if (token) {
+        context.commit("setToken", token);
+      } else {
+        context.commit("setUser", null);
+        router.push("/login");
       }
     },
-    async run(context){
-      context.dispatch("check")
-    }
+    async setData(context) {
+      const data = JSON.parse(localStorage.getItem("Data"));
+      const token = localStorage.getItem("Token");
+      if (data && token) {
+        context.commit("setUser", data);
+        context.commit("setToken", token);
+        setTimeout(() => {
+          Cookies.set("authorization", token, {
+            expires: 1,
+          });
+        }, 1000);
+      } else {
+        context.commit("setUser", null);
+        context.commit("setToken", null);
+        Cookies.remove("authorization");
+      }
+    },
+    async run(context) {
+      context.dispatch("check");
+    },
   },
   modules: {},
 });

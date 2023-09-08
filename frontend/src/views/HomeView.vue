@@ -13,6 +13,18 @@ export default {
   name: 'HomeView',
   components: {
     HelloWorld
+  },
+  computed:{
+    user(){
+      const user = this.$store.state.user
+      console.log(user)
+      return user
+    }
+  },
+  mounted(){
+    if(!this.user){
+      this.$router.push('/login')
+    }
   }
 }
 </script>
