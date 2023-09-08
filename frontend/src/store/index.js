@@ -220,28 +220,34 @@ export default createStore({
       }
     },
     async login(context, payload) {
-      try{
-        const res = await axios.post(`${miniURL}login`, payload,)
-        const expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 7);
-        console.log(res.data);
-        const { msg, token, cresult } = await res.data
-        console.log(cresult)
-        if(msg === "You are providing the wrong email"){
+      try {
+        const res = await axios.post(`${miniURL}login`, payload);
+        const { msg, token, cresult } = res.data;
+    
+        if (msg === "You are providing the wrong email") {
           context.commit("setMsg", "You are providing the wrong email");
-        }
-        if(msg === "Logged in!"){
-          context.commit("setUser", cresult)
-          context.commit("setToken", token)
+        } else if (msg === "Logged in!") {
+          await Swal.fire({
+            icon: "success",
+            title: "Logged in Successfully",
+            text: `You are now logged in! Welcome, ${cresult.userName}.`
+          });
+          console.log(cresult);
+          context.commit("setUser", cresult);
+          localStorage.setItem("Data", JSON.stringify(cresult))
+          localStorage.setItem("Token", token)
+          context.commit("setToken", token);
           Cookies.set("authorization", context.state.token, {
             expires: 1
-          })
-        } else{
-          context.commit("setMsg", err)
-          console.error("Something went wrong while logging in")
+          });
+        } else {
+          context.commit("setMsg", "Something went wrong while logging in");
+          console.error("Something went wrong while logging in", msg);
         }
-      } catch(error) {
-        throw error
+      } catch (error) {
+        // Handle specific errors here, e.g., axios errors
+        console.error("Error during login:", error);
+        throw error;
       }
     },
     async check(context){
@@ -251,6 +257,23 @@ export default createStore({
       } else{
         context.commit("setUser", null)
         router.push('/login')
+      }
+    },
+    async setData(context){
+      const data = JSON.parse(localStorage.getItem("Data"))
+      const token = (localStorage.getItem("Token"))
+      if(data && token){
+        context.commit("setUser", data)
+        context.commit("setToken", token)
+        setTimeout(()=>{
+          Cookies.set("authorization", token, {
+            expires: 1
+          })
+        }, 1000)
+      } else{
+        context.commit("setUser", null)
+        context.commit("setToken", null)
+        Cookies.remove("authorization")
       }
     },
     async run(context){
