@@ -82,11 +82,11 @@ db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
       }
   
       if (checkResults[0].count > 0) {
+        console.log(msg);
         // Email address is already in use
         res.status(400).json({
           status: 400,
           msg: "Email address is already in use.",
-          console.log(msg);
         });
       } else {
         const insertQuery = `
