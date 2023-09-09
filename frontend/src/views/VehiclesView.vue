@@ -68,7 +68,7 @@ export default {
         (vehicle) => vehicle.vehicleID === vehicleID
       );
       this.$store.commit("setSingleVehicle", chosenVehicle);
-      this.$router.push({ name: "Vehicle", params: { vehicleID: vehicleID } });
+      this.$router.push({ name: "Vehicle", params: { id: vehicleID } });
     },
   },
   mounted() {

@@ -22,7 +22,7 @@
           <div class="navbar-nav">
             <router-link to="/" class="navButtons">Home</router-link>
             <div v-if="user">
-            <router-link to="/Vehicle" class="navButtons"
+            <router-link to="/Vehicles" class="navButtons"
               >vehicles</router-link
             >
             </div>
@@ -36,7 +36,7 @@
             >
             </div>
             <div v-if="user">
-              <button type="button" class="btn bg-dark" @click="exit">
+              <button type="button" class="btn bg-dark text-white" @click="exit">
               Logout
             </button>
             </div>

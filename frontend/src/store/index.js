@@ -86,11 +86,13 @@ export default createStore({
         context.commit("setMsg", "an" + e.message);
       }
     },
-    async fetchVehicle(context) {
+    async fetchVehicle(context, id) {
       try {
+        console.log(id)
         // might need to add vehicleID here
-        const { data } = await axios.get(`${miniURL}vehicle`);
-        context.commit("setVehicle", data.results);
+        const { data } = await axios.get(`${miniURL}vehicle/${id}`);
+        console.log(data)
+        context.commit("setVehicle", await data.result);
       } catch (e) {
         context.commit("setMsg", "an error occured");
       }
