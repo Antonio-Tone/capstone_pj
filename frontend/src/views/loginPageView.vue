@@ -9,7 +9,6 @@
     </div>
 </template>
 <script>
-import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -23,9 +22,7 @@ export default {
     methods: {
         async loginCredentials() {
             const res = await this.$store.dispatch('login', this.login)
-           
-            
-                this.$router.push("/Vehicles")          
+                     
         }
     }
 }

@@ -17,7 +17,6 @@ export default {
   computed:{
     user(){
       const user = this.$store.state.user
-      console.log(user)
       return user
     }
   },

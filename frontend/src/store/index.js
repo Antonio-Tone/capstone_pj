@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import router from "../router";
 export default createStore({
   state: {
+    isLoggedIn: false,
     users: null,
     edit: null,
     user: null,
@@ -43,6 +44,9 @@ export default createStore({
     setEdit(state, edit) {
       state.edit = edit;
     },
+    setLogged(state, status) {
+      state.isLoggedIn = status;
+  },
     setUserData(state, cresult) {
       state.cresult = cresult;
       if (cresult && cresult.userRole) {
@@ -55,6 +59,7 @@ export default createStore({
         localStorage.removeItem("cresult");
       }
     },
+    
   },
   actions: {
     async fetchUsers(context) {
@@ -116,7 +121,7 @@ export default createStore({
             showConfirmButton: false,
           });
 
-          router.push("/login");
+          router.push("/");
         } else if (msg === "Email address is already in use.") {
           Swal.fire({
             icon: "error",
@@ -140,14 +145,7 @@ export default createStore({
         });
       }
     },
-
-    async logout(context) {
-      context.commit("setToken", null);
-      context.commit("setUser", null);
-      context.commit("Data", null);
-      Cookies.remove("authorization");
-    },
-
+     
     async updateUser(context, payload) {
       try {
         const res = await axios.patch(
@@ -242,12 +240,14 @@ export default createStore({
       }
     },
     async login(context, payload) {
+      console.log("logging in, please wait..")
       try {
         const res = await axios.post(`${miniURL}login`, payload);
         const { msg, token, cresult } = res.data;
 
         if (msg === "You are providing the wrong email") {
           context.commit("setMsg", "You are providing the wrong email");
+        
         } else if (msg === "Logged in!") {
           await Swal.fire({
             icon: "success",
@@ -262,6 +262,7 @@ export default createStore({
           Cookies.set("authorization", context.state.token, {
             expires: 1,
           });
+          router.push("/")
         } else {
           context.commit("setMsg", "Something went wrong while logging in");
           console.error("Something went wrong while logging in", msg);
@@ -272,15 +273,7 @@ export default createStore({
         throw error;
       }
     },
-    async check(context) {
-      const token = Cookies.get("authorization");
-      if (token) {
-        context.commit("setToken", token);
-      } else {
-        context.commit("setUser", null);
-        router.push("/login");
-      }
-    },
+    
     async setData(context) {
       const data = JSON.parse(localStorage.getItem("Data"));
       const token = localStorage.getItem("Token");
@@ -298,6 +291,54 @@ export default createStore({
         Cookies.remove("authorization");
       }
     },
+    async logOut(context) {
+      context.commit("setToken", null);
+      context.commit("setUser", null);
+      localStorage.removeItem("Data");
+      localStorage.removeItem("Token");
+      Cookies.remove("authorization");
+      router.push("/login");
+    },
+    async Confirm() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to perform this action.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, proceed!',
+        cancelButtonText: 'No, cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.dispatch("logOut")
+          console.log("logged out..redirecting to login page")
+        } else {
+          console.log("Action canceled");
+        }
+      });
+    },
+    
+    async check(context) {
+      try {
+        console.log("Checking token...");
+        const token = Cookies.get("authorization");
+    
+        if (token) {
+          console.log("Token found. Setting token in store...");
+          context.commit("setToken", token);
+  
+        } else {
+          console.log("Token not found. Clearing user data and redirecting to /login...");
+          context.commit("setUser", null);
+          context.commit("Data", null);
+          context.commit("setToken", null);
+          router.push("/login");
+        }
+      } catch (error) {
+        console.error("Error during token check:", error);
+        
+      }
+    },
+    
     async run(context) {
       context.dispatch("check");
     },

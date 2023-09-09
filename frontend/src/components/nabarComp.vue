@@ -26,12 +26,20 @@
               >vehicles</router-link
             >
             </div>
+           <div v-if="!user">
             <router-link to="/login" class="navButtons"
               >login</router-link
-            >
-            <router-link to="/Register" class="navButtons"
+            ></div>
+            <div v-if="!user">
+              <router-link to="/Register" class="navButtons"
               >register</router-link
             >
+            </div>
+            <div v-if="user">
+              <button type="button" class="btn bg-dark" @click="exit">
+              Logout
+            </button>
+            </div>
             <div v-if="user && user.userRole === 'admin'">
             <router-link to="/admin" class="navButtons"
               >Admin</router-link
@@ -73,12 +81,18 @@
   
   
 <script>
+// import { mapState } from 'vuex';
 export default {
     computed:{
         user(){
             const user = this.$store.state.user
             return user
+        },
+        exit(){
+          this.$store.dispatch("Confirm");
+         
         }
+    
     }
 }
 </script>

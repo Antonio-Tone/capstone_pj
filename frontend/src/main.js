@@ -3,6 +3,6 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-store.dispatch("run")
+store.dispatch("check")
 store.dispatch("setData")
 createApp(App).use(store).use(router).mount('#app')
