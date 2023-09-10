@@ -14,6 +14,10 @@
                 <td><img class="image" :src="item.imageURL" alt=""></td>
                 <td>{{ item.vehicleName }}</td>
                 <td>{{ item.rate }}</td>
+                <td class="d-flex gap-2">
+                    <button @click="deleteCar(item.vehicleID)" class="btn btn-danger" >Delete</button>
+                    <button class="btn btn-success">Book now</button>
+                </td>
             </tr>
         </tbody>
        </table>
@@ -21,13 +25,34 @@
 </template>
 <script>
 export default {
+    data() {
+        return {
+            data: '',
+            wishlist: []
+        }
+    },
+    mounted() {
+        this.data = JSON.parse(localStorage.getItem("Data"))
+        this.wishlist = JSON.parse(localStorage.getItem(`Wishlist-${this.data.userID}`)) || [];
+    },
     computed: {
         wishlist() {
-            const data = JSON.parse(localStorage.getItem("Data"))
-            const array = JSON.parse(localStorage.getItem("Wishlist")) || [];
-            let fileteredArray = array.filter((wishlist) => wishlist.userID === data.userID)
+            let fileteredArray = this.wishlist.filter((wishlist) => wishlist.userID === this.data.userID)
             console.log(fileteredArray);
             return fileteredArray;
+        }
+    },
+    methods: {
+        deleteCar(vehicleID) {
+            console.log(vehicleID)
+            const indexToRemove = this.wishlist.findIndex(item => item.vehicleID === vehicleID)
+            if (indexToRemove !== -1) {
+                    // Use splice to remove the item by index
+                    this.wishlist.splice(indexToRemove, 1);
+                    
+                    // Update local storage with the new wishlist
+                    localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));
+                }
         }
     }
 }

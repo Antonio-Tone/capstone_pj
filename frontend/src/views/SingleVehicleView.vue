@@ -14,30 +14,45 @@ export default {
             return this.$store.state.vehicle;
         }
     },
+    data() {
+        return {
+            data: null, // Initialize data as null
+            wishlist: [], // Initialize wishlist as an empty array
+        };
+    },
     mounted() {
+        this.data = JSON.parse(localStorage.getItem("Data"));
+        this.loadWishlist();
         this.$store.dispatch("fetchVehicle", this.id);
     },
     methods: {
         addToWishlist(car) {
-            const data = JSON.parse(localStorage.getItem("Data"))
-            const array = JSON.parse(localStorage.getItem("Wishlist")) || [];
-            const newItemId = car.vehicleID;
-            console.log(newItemId)
-            let newCar = {userID: data.userID, ...car}
-            if (!this.isInWishlist(newCar)) {
-                array.push(newCar);
-                localStorage.setItem("Wishlist", JSON.stringify(array));
-                
+            console.log(this.wishlist)
+            if (this.data && car) {
+                const newCar = { userID: this.data.userID, ...car };
+                if (!this.isInWishlist(car)) {
+                    this.wishlist.push(newCar);
+                    localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));
+                } else {
+                    console.error("Item already in wishlist or user ID exists in wishlist.");
+                }
             } else {
-                
+                console.error("Data or car is missing.");
             }
         },
         isInWishlist(car) {
-            const array = JSON.parse(localStorage.getItem("Wishlist")) || [];
-            return array.some(item => item.vehicleID === car.vehicleID);
-        }
-    }
-}
+            return this.wishlist.some(item => item.vehicleID === car.vehicleID);
+        },
+        // isUserIDIn() {
+        //     return this.wishlist.some(item => item.userID === this.data.userID);
+        // },
+        loadWishlist() {
+            if (this.data) {
+                this.wishlist = JSON.parse(localStorage.getItem(`Wishlist-${this.data.userID}`)) || [];
+            }
+        },
+    },
+};
 </script>
 
 <style>
