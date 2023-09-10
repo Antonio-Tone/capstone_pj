@@ -61,6 +61,10 @@ export default {
     vehicles() {
       return this.$store.state.vehicles;
     },
+    user(){
+      const user = this.$store.state.user
+      return user
+    }
   },
   methods: {
     viewVehicle(vehicleID) {
@@ -73,6 +77,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchVehicles");
+    if(!this.user){
+      this.$router.push('/login')
+    }
   },
   data() {
     return {

@@ -315,6 +315,8 @@ export default createStore({
           console.log("logged out..redirecting to login page")
         } else {
           console.log("Action canceled");
+          window.location.reload()
+
         }
       });
     },

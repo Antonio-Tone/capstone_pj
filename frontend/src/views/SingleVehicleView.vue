@@ -1,8 +1,24 @@
 <template>
-    <div class="single-vehicle" v-for="car in vehicle" :key="car.vehicleID">
+    <div class="row" v-for="car in vehicle" :key="car.vehicleID">
+    <div class="col-6 show">
+        <div class="single-vehicle">
         <h1>{{ car.vehicleName }}</h1>
-        <button class="btn btn-success" @click="addToWishlist(car)">Add to Wishlist</button>
+        <img class="image mb-3" :src="car.imageURL" alt="">
+        <h3>TONY'S LUX RENTALS</h3>
+        <h4> DRIVE IN STYLE</h4>
+         </div>
+    </div>
+    <div class="col-6">
+        <h1>{{ car.rate }}/HOUR</h1>
+        <ul class="list">
+            <il>{{  car.speed}}</il>
+            <il>{{  car.year}}</il>
+            <il>{{car.category}}</il>
+        </ul>
+        <button class="btn btn-success position-fixed-bottom" @click="addToWishlist(car)">Add to Wishlist</button>
         <p v-if="isInWishlist(car)">Already in Wishlist</p>
+
+    </div>
     </div>
 </template>
 
@@ -56,5 +72,17 @@ export default {
 </script>
 
 <style>
-    
+   .show{
+    width: 50%;
+    height: 100%;
+   }
+   .image{
+        width: 90%;
+        height: 350px;
+    }
+    .list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>
