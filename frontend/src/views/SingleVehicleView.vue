@@ -19,7 +19,7 @@
         <button class="btn btn-warning" @click="addToWishlist(car)">
           Add to Wishlist
         </button>
-        <button class="btn btn-success m-2" @click="booking(car)">
+        <button class="btn btn-success m-2" @click="book(car)">
           Book Now
         </button>
         <p v-if="isInWishlist(car)">Already in Wishlist</p>
@@ -40,7 +40,6 @@ export default {
     return {
       data: null,
       wishlist: [],
-       car: null,
     };
   },
   mounted() {
@@ -49,6 +48,12 @@ export default {
     this.$store.dispatch("fetchVehicle", this.id);
   },
   methods: {
+    book(car) {
+      this.$router.push({
+        path: '/bookings',
+        query: { carId: car.vehicleID }
+      });
+    },
     addToWishlist(car) {
       console.log(this.wishlist);
       if (this.data && car) {
@@ -78,10 +83,6 @@ export default {
           JSON.parse(localStorage.getItem(`Wishlist-${this.data.userID}`)) ||
           [];
       }
-    },
-    booking() {
-      this.car= car;
-      this.$router.push("/booking");
     },
   },
 };
