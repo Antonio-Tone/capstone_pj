@@ -70,9 +70,9 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
-    async fetchUser(context,userID) {
+    async fetchUser(context,id) {
       try {
-        const { data } = await axios.get(`${miniURL}user/${userID}`);
+        const { data } = await axios.get(`${miniURL}user/${id}`);
         context.commit("setUser", data.cresults);
       } catch (e) {
         context.commit("setMsg", "an error occured");
