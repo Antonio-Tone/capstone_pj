@@ -67,6 +67,10 @@ export default {
   },
   created() {
     this.refreshUsers();
+    if(localStorage.getItem("cresult")){
+      const cresult = JSON.parse(localStorage.getItem("cresult"));
+    this.$store.commit("setUserData", cresult);
+    }
   },
   methods: {
     navigateToCars() {
@@ -93,6 +97,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchUsers");
+    if (localStorage.getItem("cresult")) {
+    const cresult = JSON.parse(localStorage.getItem("cresult"));
+    this.$store.commit("setUserData", cresult);
+  }
   },
 };
 </script>

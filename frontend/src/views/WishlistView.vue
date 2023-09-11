@@ -47,10 +47,9 @@ export default {
             console.log(vehicleID)
             const indexToRemove = this.wishlist.findIndex(item => item.vehicleID === vehicleID)
             if (indexToRemove !== -1) {
-                    // Use splice to remove the item by index
+
                     this.wishlist.splice(indexToRemove, 1);
-                    
-                    // Update local storage with the new wishlist
+        
                     localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));
                 }
         }

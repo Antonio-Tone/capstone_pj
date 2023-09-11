@@ -70,10 +70,10 @@ export default createStore({
         context.commit("setMsg", "an error occured");
       }
     },
-    async fetchUser(context) {
+    async fetchUser(context,userID) {
       try {
-        const { data } = await axios.get(`${miniURL}user`);
-        context.commit("setUser", data.results);
+        const { data } = await axios.get(`${miniURL}user/${userID}`);
+        context.commit("setUser", data.cresults);
       } catch (e) {
         context.commit("setMsg", "an error occured");
       }
@@ -88,10 +88,7 @@ export default createStore({
     },
     async fetchVehicle(context, id) {
       try {
-        console.log(id)
-        // might need to add vehicleID here
         const { data } = await axios.get(`${miniURL}vehicle/${id}`);
-        console.log(data)
         context.commit("setVehicle", await data.result);
       } catch (e) {
         context.commit("setMsg", "an error occured");

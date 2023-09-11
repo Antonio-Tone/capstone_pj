@@ -1,11 +1,6 @@
 <template>
   <div class="prods">
-    <!-- <div class="row mb-2">
-    <form class="d-flex mb-5 mt-4 search" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn search" type="submit">Search</button>
-      </form>
-    </div> -->
+  
     <div class="container">
       <h2 class="class-display2 fs-1 mb-5">showroom</h2>
       <div

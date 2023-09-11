@@ -1,5 +1,6 @@
 <template>
-    <div class="row" v-for="car in vehicle" :key="car.vehicleID">
+    <div class="div">
+        <div class="row" v-for="car in vehicle" :key="car.vehicleID">
     <div class="col-6 show">
         <div class="single-vehicle">
         <h1>{{ car.vehicleName }}</h1>
@@ -20,6 +21,7 @@
 
     </div>
     </div>
+    </div>
 </template>
 
 <script>
@@ -32,8 +34,8 @@ export default {
     },
     data() {
         return {
-            data: null, // Initialize data as null
-            wishlist: [], // Initialize wishlist as an empty array
+            data: null,
+            wishlist: [], 
         };
     },
     mounted() {
@@ -59,9 +61,7 @@ export default {
         isInWishlist(car) {
             return this.wishlist.some(item => item.vehicleID === car.vehicleID);
         },
-        // isUserIDIn() {
-        //     return this.wishlist.some(item => item.userID === this.data.userID);
-        // },
+        
         loadWishlist() {
             if (this.data) {
                 this.wishlist = JSON.parse(localStorage.getItem(`Wishlist-${this.data.userID}`)) || [];
@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
    .show{
     width: 50%;
     height: 100%;
