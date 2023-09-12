@@ -75,20 +75,17 @@ class Users {
       userPass: data.userPass,
     };
   
-    const checkQuery = `
-      SELECT COUNT(*) AS count FROM users WHERE emailAdd = ${user.emailAdd}
-    `;
-  
-    db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
+   const checkQuery = "SELECT COUNT(*) AS count FROM users WHERE emailAdd = ?";
+db.query(checkQuery, [data.emailAdd], (checkErr, checkResults) => {
       if (checkErr) {
         throw checkErr;
       }
   
       if (checkResults[0].count > 0) {
         // Email address is already in use
-        res.status(400).json({
-          status: 400,
-          msg: "Email address is already in use.",
+        res.json({
+          status: res.statusCode,
+          msg: "Email address is already in use."
         });
       } else {
         const insertQuery = `
