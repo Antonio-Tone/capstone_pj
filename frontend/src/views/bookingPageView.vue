@@ -11,19 +11,20 @@
     </div>
     <div class="col-6">
       <h1 class="mb-5"> CHECKOUT</h1>
-      <form @submit.prevent="book">
+      <form @submit.prevent="placeOrder">
         <div class="d-flex justify-content-center mx-auto">
           <span><p class="m-3">DATE:</p></span>
-        <input type="date" v-model="booking.orderDate" required />
+        <input type="date" v-model="booking.orderDate" id="date" required />
         </div>
         <br/>
         <div class="d-flex justify-content-center mx-auto">
-          <input type="time" class="m-3" v-model="booking.fromTime" required id="from" />
+          <input type="time" class="m-3" v-model="booking.Total_Booked_Hours" required id="from" />
         <span><p class="mt-3 ">TO</p></span>
-        <input type="time" class="m-3" v-model="booking.toTime" required id="to" />
-        </div>
-        <button type="submit" class="btn btn-primary position-bottom-fixed">PAY</button>
-      </form>
+        <input type="time" class="m-3" required id="to" />
+        </div>  
+        <button type="submit" class="btn btn-primary position-bottom-fixed" >PAY</button>
+        <button type="reset">clear</button>
+      </form>     
     </div>
   </div>
 </template>
@@ -36,6 +37,9 @@ export default {
     vehicle() {
       return this.$store.state.viewedVehicle; 
     },
+    user(){
+      return this.$store.state.user;
+    }
   },
   data() {
     return {
@@ -43,29 +47,40 @@ export default {
         userID: "",
         vehicleID: "",
         orderDate: "",
-        toTime: "",
-        fromTime: "",
+        Total_Booked_Hours: "",
+      
       },
     };
   },
-  created() {
+  created() { 
+  this.$store.dispatch("fetchVehicle", this.carId);
     this.$store.dispatch("fetchVehicle", this.carId);
   },
   methods: {
-    book() {
-      const from = document.querySelector("#from");
-      const to = document.querySelector("#to");
-      const fromVal = from.value;
-      const toVal = to.value;
+   book() {
+  const from = document.querySelector("#from");
+  const to = document.querySelector("#to");
+  const date = document.querySelector("#date");
+  const fromVal = from.value;
+  const toVal = to.value;
+  const booked = date.value;
+  const fromTimes = fromVal.split(":");
+  const toTimes = toVal.split(":");
+  const fromMin = parseInt(fromTimes[0]) * 60 + parseInt(fromTimes[1]);
+  const toMin = parseInt(toTimes[0]) * 60 + parseInt(toTimes[1]);
+  const timeDiff = fromMin - toMin;
+  const finalVal = Math.ceil(timeDiff / 60 * -1);
+  this.booking.Total_Booked_Hours = finalVal;
+  this.booking.orderDate = booked;
 
-      const fromTimes = fromVal.split(":");
-      const toTimes = toVal.split(":");
-      const fromMin = parseInt(fromTimes[0] * 60 + parseInt(fromTimes[1]));
-      const toMin = parseInt(toTimes[0] * 60 + parseInt(toTimes[1]));
-      const timeDiff = fromMin - toMin;
-      const finalVal = Math.ceil(timeDiff / 60 * -1)
-      console.log(finalVal)
-    },
+},
+
+    placeOrder(){
+      this.book();
+      this.booking.userID= this.$store.state.user.userID;
+      this.booking.vehicleID = this.carId;
+      this.$store.dispatch("addOrder", this.booking);
+    }
   },
 };
 </script>

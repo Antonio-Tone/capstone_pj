@@ -12,6 +12,7 @@ export default createStore({
     user: null,
     vehicles: null,
     vehicle: null,
+    order: null,
     spinner: null,
     token: null,
     msg: null,
@@ -34,6 +35,9 @@ export default createStore({
     },
     setVehicle(state, vehicle) {
       state.vehicle = vehicle;
+    },
+    setOrder(state, order) {
+      state.order = order;
     },
     setToken(state, token) {
       state.token = token;
@@ -186,10 +190,10 @@ export default createStore({
       console.log("REACHED");
       try {
         const { res } = await axios.post(`${miniURL}vehicle`, payload);
-        const { results, err } = await res.data;
+        const { results} = await res.data;
         if (results) {
           context.commit("setVehicle", results[0]);
-          context.commit("setSpinner", false);
+          context.commit("Spinner", false);
         } else {
           context.commit("setMsg", msg);
         }
@@ -337,6 +341,21 @@ export default createStore({
       } catch (error) {
         console.error("Error during token check:", error);
         
+      }
+    },
+    async addOrder(context, payload) {
+      console.log("order dispatched ");
+      try {
+        const { res } = await axios.post(`${miniURL}Order`, payload);
+        const { results} = await res.data;
+        if (results) {
+          context.commit("setOrder", results[0]);
+          context.commit("Spinner", false);
+        } else {
+          context.commit("setMsg", msg);
+        }
+      } catch (e) {
+        context.commit("setMsg", "an error occured");
       }
     },
     
