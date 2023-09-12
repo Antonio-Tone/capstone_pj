@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   props: ["id"],
   computed: {
@@ -64,10 +65,18 @@ export default {
             `Wishlist-${this.data.userID}`,
             JSON.stringify(this.wishlist)
           );
+             Swal.fire({
+            icon: "success",
+            title: "added to list!",
+            text: `Vehicle has been added to your wishlist`,
+          });
         } else {
-          console.error(
-            "Item already in wishlist or user ID exists in wishlist."
-          );
+           Swal.fire({
+            icon: "info",
+            title: "already in wishlist",
+            text: `Vehicle is already in wishlist`,
+          });
+          
         }
       } else {
         console.error("Data or car is missing.");
@@ -75,6 +84,7 @@ export default {
     },
     isInWishlist(car) {
       return this.wishlist.some((item) => item.vehicleID === car.vehicleID);
+
     },
 
     loadWishlist() {

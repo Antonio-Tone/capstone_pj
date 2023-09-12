@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+import router from "../router";
 export default {
   props: ["carId"], 
 
@@ -80,6 +82,13 @@ export default {
       this.booking.userID= this.$store.state.user.userID;
       this.booking.vehicleID = this.carId;
       this.$store.dispatch("addOrder", this.booking);
+       Swal.fire({
+         icon: "success",
+         title: "Booking has been placed successfully",
+         text: `Our team will get in contact with you soon, ${this.$store.state.user.userName}.`,
+          });
+        router.push("/Vehicles")
+
     }
   },
 };

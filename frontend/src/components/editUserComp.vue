@@ -33,8 +33,6 @@
             ></button>
           </div>
           <div class="modal-body">
-            <!-- <label>userID:</label>
-            <input type="text" placeholder="ID" v-model="updateUser.userID" /> -->
             <label>first name:</label>
             <input
               type="text"
