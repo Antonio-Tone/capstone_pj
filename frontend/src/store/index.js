@@ -63,8 +63,8 @@ export default createStore({
         localStorage.removeItem("cresult");
       }
     },
-    
   },
+  
   actions: {
     async fetchUsers(context) {
       try {
