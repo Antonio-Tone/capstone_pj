@@ -7,6 +7,11 @@
         v-if="vehicles"
       >
         <div class="options">
+          <select name="select" id="">
+            <option value="supercar">SUPERCAR</option>
+            <option value="suv">SUV'S</option>
+            <option value="comfort">LUXURY COMFORT</option>
+          </select>
     <div class="search">
       <input type="text" v-model="search" placeholder="search" />
     </div>
@@ -55,6 +60,7 @@ export default {
     return {
       hoveredVehicle: null,
      search: "",
+     select:"",
       Categories: "All",
     };
   },
