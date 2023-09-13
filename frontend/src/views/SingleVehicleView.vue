@@ -99,6 +99,9 @@ export default {
 </script>
 
 <style scoped>
+.row{
+  width: 100%;
+}
 .show {
   width: 50%;
   height: 100%;

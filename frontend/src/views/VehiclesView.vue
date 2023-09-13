@@ -6,25 +6,9 @@
         class="row justify-content-center gap-6"
         v-if="vehicles"
       >
-<<<<<<< HEAD
-        <div class="options">
-          <select name="select" id="">
-            <option value="supercar">SUPERCAR</option>
-            <option value="suv">SUV'S</option>
-            <option value="comfort">LUXURY COMFORT</option>
-          </select>
-    <div class="search">
-      <input type="text" v-model="search" placeholder="search" />
-    </div>
-    <div>
-      <button @click="sortByPrice" class="sort">Sort by Price</button>
-      <button @click="sortByName" class="sort">Sort by Name</button>
-    </div>
-=======
       <div class="options">
   <div class="search">
     <input type="text" v-model="search" placeholder="Search" />
->>>>>>> 273ed33484ebf6f42ba215d6d049fd3ee6ba8cb6
   </div>
   <div>
     <label for="categorySelect">Select Category:</label>
@@ -44,7 +28,7 @@
 
         <div class="col-4" v-for="car in filteredVehicles" :key="car.vehicleID">
           <div
-            class="card"
+            class="card mb-5"
             style="width: 18rem"
             @mouseover="hoveredVehicle = car"
             @mouseleave="hoveredVehicle = null"
@@ -161,3 +145,8 @@ export default {
   
 };
 </script>
+<style scoped>
+img{
+  height: 200px;
+}
+</style>

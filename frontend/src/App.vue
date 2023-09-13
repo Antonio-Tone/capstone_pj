@@ -1,7 +1,8 @@
 <template>
 <div>
   <NavBarComp/>
- <router-view/>
+  <router-view/>
+  <FooterComp/>
  </div>
 </template>
 
@@ -15,7 +16,7 @@
   text-align: center;
   color: rgb(44, 62, 80);
   background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
-  min-height: 100vh;
+  min-height: 100vh !important;
 }
 
 nav {
@@ -34,9 +35,11 @@ nav a.router-link-exact-active {
 
 <script>
   import NavBarComp from './components/nabarComp.vue';
+  import FooterComp from './components/FooterComp.vue';
 export default {
    components: {
-    NavBarComp
+    NavBarComp,
+    FooterComp
   },
   computed: {
     user(){
