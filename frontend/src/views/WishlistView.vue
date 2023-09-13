@@ -24,6 +24,7 @@
          </div>
 </template>
 <script>
+import Swal from "sweetalert2";
 export default {
     data() {
         return {
@@ -44,14 +45,30 @@ export default {
     },
     methods: {
         deleteCar(vehicleID) {
-            console.log(vehicleID)
-            const indexToRemove = this.wishlist.findIndex(item => item.vehicleID === vehicleID)
+            Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to remove this vehicle from your wishlist.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, proceed!',
+        cancelButtonText: 'No, cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+         const indexToRemove = this.wishlist.findIndex(item => item.vehicleID === vehicleID)
             if (indexToRemove !== -1) {
 
                     this.wishlist.splice(indexToRemove, 1);
         
                     localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));
                 }
+          
+        } else {
+          console.log("Action canceled");
+          window.location.reload()
+
+        }
+      });
+            
         }
     }
 }

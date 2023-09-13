@@ -6,15 +6,26 @@
         class="row justify-content-center gap-6"
         v-if="vehicles"
       >
-        <div class="options">
-    <div class="search">
-      <input type="text" v-model="search" placeholder="search" />
-    </div>
-    <div>
-      <button @click="sortByPrice" class="sort">Sort by Price</button>
-      <button @click="sortByName" class="sort">Sort by Name</button>
-    </div>
+      <div class="options">
+  <div class="search">
+    <input type="text" v-model="search" placeholder="Search" />
   </div>
+  <div>
+    <label for="categorySelect">Select Category:</label>
+    <select id="categorySelect" v-model="Categories">
+      <option value="All">All Categories</option>
+      <option value="supercar">Supercars</option>
+      <option value="SUV">Suv's</option>
+      <option value="comfort">Luxury Comfort</option>
+      
+    </select>
+  </div>
+  <div>
+    <button @click="sortByPrice" class="sort">Sort by Price</button>
+    <button @click="sortByName" class="sort">Sort by Name</button>
+  </div>
+</div>
+
         <div class="col-4" v-for="car in filteredVehicles" :key="car.vehicleID">
           <div
             class="card"
