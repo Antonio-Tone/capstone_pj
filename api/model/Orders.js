@@ -3,7 +3,7 @@ class Orders{
     
     fetchOrders(req, res) {
         const query = `
-            SELECT orderID,price,userID,vehicleID,orderDate,Total_Booked_Hours 
+            SELECT orderID,userID,vehicleID,orderDate,Total_Booked_Hours 
             FROM orders
         `;
         db.query(query, (err, data) => {
@@ -17,7 +17,7 @@ class Orders{
 
       fetchOrder(req, res) {
         const query = `
-        SELECT orderID,price,userID,vehicleID,orderDate,Total_Booked_Hours FROM orders 
+        SELECT orderID,userID,vehicleID,orderDate,Total_Booked_Hours FROM orders 
             WHERE orderID = ${req.params.id}
         `;
         db.query(query, (err, result) => {
