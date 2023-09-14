@@ -6,7 +6,7 @@
         <img class="image mb-3" :src="vehicle.imageURL" alt="" />
         <h3>TONY'S LUX RENTALS</h3>
           <h4>DRIVE IN STYLE</h4>
-          <p>©COPYRIGHTS RESERVED BY ANTONIO TONE</p>
+          <!-- <p>©COPYRIGHTS RESERVED BY ANTONIO TONE</p> -->
       </div>
     </div>
     <div class="col-6">
@@ -24,7 +24,15 @@
         </div>  
         <button type="submit" class="btn btn-primary position-bottom-fixed" >PAY</button>
         <button type="reset">clear</button>
-      </form>     
+      </form> 
+      <div class="">
+        <label for="">CARD HOLDER NAME:</label>
+        <input type="text" placeholder="NAME" required>
+      </div>    
+      <div class="">
+        <label for="">CARD NUMBER:</label>
+        <input type="number" placeholder="Card Number" required>
+      </div>    
     </div>
   </div>
 </template>

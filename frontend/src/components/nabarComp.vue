@@ -2,7 +2,8 @@
   <div>
     <nav class="navbar">
       <div class="container-fluid">
-        <router-link to="/"><img src="https://i.postimg.cc/B6Z5Jv45/Screenshot-2023-08-28-091607.png" alt="laiquah" loading="lazy"></router-link>
+        <!-- <router-link to="/"></router-link> -->
+        <p class="my-3">TONY'S LUX RENTAL'S</p>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,7 +37,7 @@
                 <router-link to="/about" class="navButtons"
                 >About</router-link
               >
-              </li>
+              </li> 
               <li class="nav-item" data-bs-dismiss="offcanvas">
                 <router-link to="/contact" class="navButtons"
             >Contact</router-link
@@ -103,6 +104,8 @@ margin-bottom: 3rem;
 img{
   height:3.5rem ;
 width:3rem;
+border-radius:50px;
+margin-right: 10px;
 }
 
 .offcanvas-body{

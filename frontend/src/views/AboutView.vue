@@ -45,8 +45,9 @@ width: 100%;
     margin-bottom: 40px;
 }
 img {
-  height: 250px;
-  border-radius: 30px;
+  height: 350px;
+  
+  width: 100%;
 }
 
 .info {

@@ -55,13 +55,19 @@
               placeholder="email address"
               v-model="editUser.emailAdd"
             />
-            
-            <!-- <label>user profile:</label>
+            <label>user profile:</label>
             <input
               type="text"
               placeholder="profile image"
-              v-model="editingUser.userProfile"
-            /> -->
+              v-model="editUser.userImage"
+            /> 
+            <div v-if="user && editUser.userRole ==='user'">
+              <label>Password:</label>
+            <input
+              type="password"
+              placeholder="New password"
+              v-model="editUser.userPass"
+            /></div> 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn bg-dark" data-bs-dismiss="modal">
