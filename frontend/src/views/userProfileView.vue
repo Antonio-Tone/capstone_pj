@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-6 d-flex my-auto align-item-center justify-content-center">
-      <img src="https://i.postimg.cc/q7r3KKSy/icons8-ferrari-50.png" alt="">
+      <img class="pic" :src="user.userImage" alt="">
     </div>
     <div class="col-6 my-auto align-item-center">
       <h1 class="mx-auto d-flex justify-content-center mt-5">MY PROFILE</h1>
@@ -41,5 +41,9 @@ ul{
 }
 il{
   margin: 20px;
+}
+.pic{
+  height: 250px;
+  width: 260px;
 }
 </style>

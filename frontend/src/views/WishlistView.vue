@@ -1,6 +1,6 @@
 <template>
-         <div class="">
-            <table>
+         <div class="main">
+            <table class="table-responsive">
         <thead>
             <tr>
                 <th>Image</th>
@@ -78,5 +78,8 @@ export default {
         height: 80px;
         border-radius: 20px;
         position: center !important;
+    }
+    .main{
+        min-height: 100vh;
     }
 </style>

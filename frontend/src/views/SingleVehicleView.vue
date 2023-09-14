@@ -1,20 +1,22 @@
 <template>
-  <div class="div">
+  <div class="div mb-2">
     <div class="row" v-for="car in vehicle" :key="car.vehicleID">
-      <div class="col-6 show">
+      <div class="col-6 show my-auto align-item-center mt-3">
         <div class="single-vehicle">
           <h1>{{ car.vehicleName }}</h1>
           <img class="image mb-3" :src="car.imageURL" alt="" />
           <h3>TONY'S LUX RENTALS</h3>
           <h4>DRIVE IN STYLE</h4>
+          <p class="mt-5">©COPYRIGHTS RESERVED BY ANTONIO TONE</p>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-6 mt-3">
         <h1>{{ car.rate }}/HOUR</h1>
         <ul class="list">
-          <il>{{ car.speed }}</il>
-          <il>{{ car.year }}</il>
+          <il> <img src="https://i.postimg.cc/TP03cGFh/icons8-speed-48.png" alt="">{{ car.speed }}</il>
+          <il> <img src="https://i.postimg.cc/cLXJR0VC/icons8-calendar-48.png" alt="">{{ car.year }}</il>
           <il>{{ car.category }}</il>
+          <il><img src="https://i.postimg.cc/50sPMPKn/icons8-star-48.png" alt="">{{ car.rating }}</il>
         </ul>
         <button class="btn btn-warning" @click="addToWishlist(car)">
           Add to Wishlist

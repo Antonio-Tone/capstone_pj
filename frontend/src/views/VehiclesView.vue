@@ -2,31 +2,30 @@
   <div class="prods">
     <div class="container">
       <h2 class="class-display2 fs-1 mb-5">showroom</h2>
-      <div
-        class="row justify-content-center gap-6"
-        v-if="vehicles"
-      >
-      <div class="options">
-  <div class="search">
-    <input type="text" v-model="search" placeholder="Search" />
-  </div>
-  <div>
-    <label for="categorySelect">Select Category:</label>
-    <select id="categorySelect" v-model="Categories">
-      <option value="All">All Categories</option>
-      <option value="supercar">Supercars</option>
-      <option value="SUV">Suv's</option>
-      <option value="comfort">Luxury Comfort</option>
-      
-    </select>
-  </div>
-  <div>
-    <button @click="sortByPrice" class="sort">Sort by Price</button>
-    <button @click="sortByName" class="sort">Sort by Name</button>
-  </div>
-</div>
-
-        <div class="col-4" v-for="car in filteredVehicles" :key="car.vehicleID">
+      <div class="row justify-content-center gap-6" v-if="vehicles">
+        <div class="options">
+          <div class="search">
+            <input type="text" v-model="search" placeholder="Search" />
+          </div>
+          <div>
+            <label for="categorySelect">Select Category:</label>
+            <select id="categorySelect" v-model="Categories">
+              <option value="All">All Categories</option>
+              <option value="supercar">Supercars</option>
+              <option value="SUV">Suv's</option>
+              <option value="comfort">Luxury Comfort</option>
+            </select>
+          </div>
+          <div>
+            <button @click="sortByPrice" class="sort">Sort by Price</button>
+            <button @click="sortByName" class="sort">Sort by Name</button>
+          </div>
+        </div>
+        <div
+          class="col-4 blob"
+          v-for="car in filteredVehicles"
+          :key="car.vehicleID"
+        >
           <div
             class="card mb-5"
             style="width: 18rem"
@@ -40,7 +39,7 @@
             />
             <div class="card-body">
               <h5 class="card-title">{{ car.vehicleName }} <br /></h5>
-              <p>{{car.category}}</p>
+              <p>{{ car.category }}</p>
               <center>
                 <button class="view" @click="viewVehicle(car.vehicleID)">
                   view more
@@ -51,22 +50,22 @@
         </div>
       </div>
       <div v-else class="row">
-        <Spinner/>
+        <Spinner />
       </div>
     </div>
   </div>
 </template>
 <script>
-  import Spinner from "../components/SpinnerComp.vue";
+import Spinner from "../components/SpinnerComp.vue";
 export default {
   components: {
     Spinner,
   },
-      data() {
+  data() {
     return {
       hoveredVehicle: null,
-     search: "",
-     select:"",
+      search: "",
+      select: "",
       Categories: "All",
     };
   },
@@ -74,12 +73,12 @@ export default {
     vehicles() {
       return this.$store.state.vehicles;
     },
-    user(){
-      const user = this.$store.state.user
-      return user
+    user() {
+      const user = this.$store.state.user;
+      return user;
     },
 
-    filteredVehicles(){
+    filteredVehicles() {
       return this.$store.state.vehicles?.filter((vehicle) => {
         let isMatch = true;
         if (
@@ -87,16 +86,12 @@ export default {
         ) {
           isMatch = false;
         }
-        if (
-          this.Categories !== "All" &&
-          this.Categories !== vehicle.category
-        ) {
+        if (this.Categories !== "All" && this.Categories !== vehicle.category) {
           isMatch = false;
         }
         return isMatch;
       });
-    
-    }
+    },
   },
   methods: {
     viewVehicle(vehicleID) {
@@ -107,18 +102,17 @@ export default {
       this.$router.push({ name: "Vehicle", params: { id: vehicleID } });
     },
     sortByPrice(state) {
-      this.$store.state.vehicles.sort ((a, b) => {
+      this.$store.state.vehicles.sort((a, b) => {
         return a.rate - b.rate;
       });
       if (!state.asc) {
         this.$store.state.vehicles.reverse();
       }
-      state.asc= !state.asc
-    
+      state.asc = !state.asc;
+
       this.$store.commit("sortVehicles");
     },
     sortByName(state) {
-      
       this.$store.state.vehicles.sort((a, b) => {
         if (a.vehicleName < b.vehicleName) {
           return -1;
@@ -131,22 +125,26 @@ export default {
       if (!state.asc) {
         this.$store.state.vehicles.reverse();
       }
-      state.asc = !state.asc
-    
+      state.asc = !state.asc;
+
       this.$store.commit("sortByName");
     },
   },
   mounted() {
     this.$store.dispatch("fetchVehicles");
-    if(!this.user){
-      this.$router.push('/login')
+    if (!this.user) {
+      this.$router.push("/login");
     }
   },
-  
 };
 </script>
 <style scoped>
-img{
+img {
   height: 200px;
+  border-radius:16px 16px 0 0;
+}
+
+.card {
+  border-radius: 16px;
 }
 </style>

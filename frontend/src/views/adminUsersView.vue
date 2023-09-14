@@ -15,6 +15,7 @@
             <th>gender</th>
             <th>role</th>
             <th>email address</th>
+            <th>picture</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -27,6 +28,7 @@
             <td>{{ user.gender }}</td>
             <td>{{ user.userRole }}</td>
             <td>{{ user.emailAdd }}</td>
+            <td> <img class="image" :src="user.userImage" alt=""> </td>
             <td>
               <updateUser :user="user" @userUpdated="refreshUsers" />
               <button
@@ -109,5 +111,10 @@ th,
 td,
 .btn {
   color: white;
+}
+.image {
+  height: 60px;
+  border-radius: 20px;
+  position: center !important;
 }
 </style>
