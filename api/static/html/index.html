@@ -4,8 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tonys lux rental</title>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #EBE2EA;
+}
+h2 {
+    color: rgb(0, 134, 31);
+}
+</style>
 </head>
 <body>
-    
+    <h2>Home</h2>
+    <table>
+      <tr>
+        <th>HTTP Methods</th>
+        <th>Path</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/(Home page)</td>
+        <td>Takes you to the home page</td>
+      </tr>
+    </table>
+    <h2>Users Table</h2>
+    <table>
+      <tr>
+        <th>HTTP Methods</th>
+        <th>Path</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/users</td>
+        <td>displays a list of users</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/user/:id</td>
+        <td>displays a specific user based on id</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/register</td>
+        <td>Creates a new user</td>
+      </tr>
+      <tr>
+        <td>PATCH/PUT</td>
+        <td>/user/:id</td>
+        <td>Updates an existing user or adds a user</td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>/user/:id</td>
+        <td>Deletes a user</td>
+      </tr>
+    </table>
+    <h2>Vehicles Table</h2>
+    <table>
+      <tr>
+        <th>HTTP Methods</th>
+        <th>Path</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/Vehicles</td>
+        <td>Displays a list of vehicles</td>
+      </tr>
+      <tr>
+        <td>GET </td>
+        <td>/Vehicle/:id</td>
+        <td>Displays a single vehicle by id</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/Vehicle</td>
+        <td>Adds a new vehicle</td>
+      </tr>
+      <tr>
+        <td>PUT/PATCH</td>
+        <td>/Vehicle/:id</td>
+        <td>Update a vehicles details</td>
+      </tr>
+      <tr>
+        <td>DELETE </td>
+        <td>/Vehicle/:id</td>
+        <td>deletes a vehicle from the database</td>
+      </tr>
+    </table>
+    <h2>Orders Table</h2>
+    <table>
+      <tr>
+        <th>HTTP Methods</th>
+        <th>Path</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/Orders</td>
+        <td>Displays a list of orders</td>
+      </tr>
+      <tr>
+        <td>GET </td>
+        <td>/Order/:id</td>
+        <td>Displays a single order by id</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/Order</td>
+        <td>Adds a new order</td>
+      </tr>
+      <tr>
+        <td>PUT/PATCH</td>
+        <td>/Order/:id</td>
+        <td>Update an order details</td>
+      </tr>
+      <tr>
+        <td>DELETE </td>
+        <td>/Order/:id</td>
+        <td>deletes a order from the database</td>
+      </tr>
+    </table>
 </body>
 </html>
