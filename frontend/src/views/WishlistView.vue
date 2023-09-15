@@ -13,10 +13,9 @@
             <tr v-for="item in wishlist" :key="item.vehicleID">
                 <td><img class="image" :src="item.imageURL" alt=""></td>
                 <td>{{ item.vehicleName }}</td>
-                <td>{{ item.rate }}</td>
-                <td class="d-flex gap-2">
+                <td>R{{ item.rate }}</td>
+                <td class="my-auto">
                     <button @click="deleteCar(item.vehicleID)" class="btn btn-danger" >Delete</button>
-                    <button class="btn btn-success">Book now</button>
                 </td>
             </tr>
         </tbody>
@@ -75,11 +74,19 @@ export default {
 </script>
 <style scoped>
     .image {
-        height: 80px;
+        height: 180px;
         border-radius: 20px;
-        position: center !important;
+        /* position: center !important; */
     }
     .main{
-        min-height: 100vh;
+        min-height: 78.9vh;
+    }
+    table {
+        margin-top: 15px;
+        width: 100%;
+        min-height: 50vh !important;
+    }
+    tr,td{
+        border: 1px solid black;
     }
 </style>

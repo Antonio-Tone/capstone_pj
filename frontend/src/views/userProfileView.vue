@@ -66,7 +66,7 @@ export default {
 <style scoped>
 .row {
   width: 100%;
-  min-height: 77vh !important;
+  min-height: 80.9vh !important;
 }
 ul {
   list-style: none;

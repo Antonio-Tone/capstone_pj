@@ -2,10 +2,9 @@
   <div>
     <nav class="navbar">
       <div class="container-fluid">
-        <!-- <router-link to="/"></router-link> -->
-        <p class="my-3">TONY'S LUX RENTAL'S</p>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <p class="name">TONY'S LUX RENTAL'S</p>
+        <button class="navbar-toggler btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon btn-warning"></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div v-if="user" class="offcanvas-header profile">
@@ -91,12 +90,6 @@ background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0,
   color: white;
   height: 5rem;
 }
-
-
-.navbar:hover{
-color: black;
-}
-
 .nav-item{
 margin-bottom: 3rem;
 }
@@ -116,6 +109,29 @@ padding: 0 !important;
 background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
 width: 100% !important;
 }
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+@media  (max-width: 350px){
+.name{
+  display: none;
+}
+
+}
+.btn{
+  background-color: rgb(68,85,100) !important;
+}
+  
+
 
 </style>
 

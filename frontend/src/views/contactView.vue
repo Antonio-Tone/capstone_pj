@@ -18,7 +18,7 @@
             name="name"
             class="form-control"
             id="exampleFormControlInput1"
-            placeholder="Bucky"
+            placeholder="Enzo"
             required
             oninvalid="this.setCustomValidity('Please insert your first name')"
             oninput="this.setCustomValidity('')"
@@ -32,7 +32,7 @@
             name="name"
             class="form-control"
             id="exampleFormControlInput1"
-            placeholder="Barnes"
+            placeholder="Ferrari"
             required
             oninvalid="this.setCustomValidity('Please insert your last name')"
             oninput="this.setCustomValidity('')"
@@ -47,7 +47,7 @@
           type="email"
           class="form-control"
           id="exampleFormControlInput1"
-          placeholder="wintersoldier@hydra.com"
+          placeholder="Enzo@ferrari.com"
           required
           oninvalid="this.setCustomValidity('Please insert your email address')"
           oninput="this.setCustomValidity('')"
@@ -84,6 +84,9 @@ export default {};
 </script>
 
 <style scoped>
+.main{
+  min-height: 80.8vh;
+}
 .heading {
   margin-bottom: 20px;
 }
@@ -98,8 +101,8 @@ export default {};
 input,
 textarea {
   color: #eeebdd !important;
-  border: 2px solid #ce1212;
-  background: #ce1212 !important;
+  background: radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%);
+
   border-radius: 20px;
 }
 
@@ -117,7 +120,7 @@ textarea {
 
 button {
   color: #eeebdd;
-  background: #ce1212;
+  background:rgb(34,34,34);
   width: 100px;
   border: 0px;
   border-radius: 20px;
@@ -130,8 +133,8 @@ button {
 
 button:hover {
   color: #eeebdd;
-  background: #ce1212;
-  box-shadow: 0 0 30px 5px #ce1212;
+  background: rgb(228,212,134);
+  box-shadow: 0 0 30px 5px rgb(228,212,134);
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;

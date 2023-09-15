@@ -2,8 +2,8 @@
 <div class="main">
   <img src="https://i.postimg.cc/VkYnkbLS/Rolls-Royce-Cullinan-Open-Door-1600x900.jpg" class="d-block home" alt="...">
   <div class="text">
- <h4 class="animated animate__fadeInDown text-dark" style="animation-delay: 3s;"  >Welcome to Tony's Lux Rental's</h4>
- <p class="animated animate__fadeIn text-dark" style="animation-delay: 4s;" >Where you drive in style!</p>
+ <h4 class="animated animate__fadeInDown head" style="animation-delay: 3s;"  >Welcome to Tony's Lux Rental's</h4>
+ <p class="animated animate__fadeIn lead" style="animation-delay: 4s;" >Where you drive in style!</p>
 <button class="animated animate__fadeInUp btn z-1" style="animation-delay: 3s;" @click="navigateToShowroom">Showroom</button>
  </div>
             
@@ -47,12 +47,30 @@ export default {
 .home{
  position: absolute !important;
  width: 100% !important;
- height: 600px !important;
+ height: 620px !important;
+ z-index: 0 !important;
 }
 
 .text{ 
+  font-family: 'Poltawski Nowy', serif;
   position: relative;
-  padding-top: 30rem;
+  padding-top: 28rem;
 }
+.head{
+  font-size: 45px;
+  color: black;
 
+}
+.lead{
+  font-size:30px;
+  color:black;
+}
+.btn{
+padding: 5px;
+background: black;
+}
+.btn:hover{
+  scale:105%;
+  color: red;
+}
 </style>

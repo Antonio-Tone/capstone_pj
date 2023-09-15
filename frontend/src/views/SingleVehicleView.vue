@@ -1,23 +1,23 @@
 <template>
   <div class="div">
     <div class="row" v-for="car in vehicle" :key="car.vehicleID">
-      <div class="col-6 show my-auto align-item-center mt-3">
+      <div class="col-6 show my-auto align-item-center mt-5 mb-4">
         <div class="single-vehicle">
           <h1>{{ car.vehicleName }}</h1>
           <img class="image mb-3" :src="car.imageURL" alt="" />
           <h3>TONY'S LUX RENTALS</h3>
           <h4>DRIVE IN STYLE</h4>
-          <!-- <p class="mt-3">©COPYRIGHTS RESERVED BY ANTONIO TONE</p> -->
+          <p class="copy">©COPYRIGHTS RESERVED BY ANTONIO TONE</p>
         </div>
       </div>
-      <div class="col-6 mt-3">
-        <h1>{{ car.rate }}/HOUR</h1>
+      <div class="col-6 mt-5 mb-4 stats">
+        <h3 class="d-flex mx-auto justify-content-center">R{{ car.rate }}/hour</h3>
         <ul class="list">
-          <il> <img src="https://i.postimg.cc/TP03cGFh/icons8-speed-48.png" alt=""> {{ car.speed }} KM/H TOP SPEED!
+          <il> <img class="animated animate__Spin" style="transition: 2s ease-in-out;" src="https://i.postimg.cc/TP03cGFh/icons8-speed-48.png" alt=""> {{ car.speed }} KM/H TOP SPEED!
           </il>
-          <il> <img src="https://i.postimg.cc/cLXJR0VC/icons8-calendar-48.png" alt="">  {{ car.year }}  YEAR MODEL</il>
-          <il><img src="https://i.postimg.cc/Bb4BHPm6/icons8-automatic-transmission-64.png" alt=""> AUTOMATIC TRANSMISSION</il>
-          <il><img src="https://i.postimg.cc/50sPMPKn/icons8-star-48.png" class="star" alt="">:   {{ car.rating }} STAR RATING</il>
+          <il> <img class="animate animate__bounce" src="https://i.postimg.cc/cLXJR0VC/icons8-calendar-48.png" alt="">  {{ car.year }}  YEAR MODEL</il>
+          <il><img class="animate animate__bounce" src="https://i.postimg.cc/Bb4BHPm6/icons8-automatic-transmission-64.png" alt=""> AUTOMATIC TRANSMISSION</il>
+          <il><img class="animate animate__bounce star" src="https://i.postimg.cc/50sPMPKn/icons8-star-48.png" alt="">:   {{ car.rating }} STAR RATING</il>
         </ul>
           <div class="buttons">
             <button class="btn btn-warning wish" @click="addToWishlist(car)">
@@ -26,8 +26,8 @@
         <button class="btn btn-success book" @click="book(car)">
           Book Now
         </button>
-        <p v-if="isInWishlist(car)">Already in Wishlist</p>
           </div>
+        <p class="m-2" v-if="isInWishlist(car)">Already in Wishlist</p>
       </div>
     </div>
   </div>
@@ -106,14 +106,21 @@ export default {
 <style scoped>
 .row{
   width: 100%;
+ background:rgb(34,34,34)
 }
+.col-6{
+  border: 1px solid grey;
+
+}
+
 .show {
   width: 50%;
   height: 100%;
 }
 .image {
-  width: 90%;
+  width: 400px;
   height: 350px;
+  border-radius: 20px;
 }
 .list {
   display: flex;
@@ -141,6 +148,10 @@ margin-left: 10px;
 }
 .book{
   margin-left: 10px;
+}
+.copy{
+  font-size: 10px;
+  color: grey;
 }
 
 </style>
