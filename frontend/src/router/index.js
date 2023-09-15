@@ -69,7 +69,8 @@ const routes = [
   {
     path: '/bookings',
     name: 'bookings',
-    component: () => import(/* webpackChunkName: "about" */ '../views/bookingPageView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/bookingPageView.vue'),
+    props: (route) => ({ carId: route.query.carId })
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

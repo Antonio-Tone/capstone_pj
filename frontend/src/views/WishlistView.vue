@@ -16,13 +16,15 @@
                 <td>R{{ item.rate }}</td>
                 <td class="my-auto">
                     <button @click="deleteCar(item.vehicleID)" class="btn btn-danger" >Delete</button>
+                    <button class="btn btn-success m-2" @click="direct(item.vehicleID)" >View</button>
                 </td>
             </tr>
-        </tbody>
+        </tbody>``
        </table>
          </div>
 </template>
 <script>
+import router from "../router";
 import Swal from "sweetalert2";
 export default {
     data() {
@@ -38,7 +40,6 @@ export default {
     computed: {
         wishlist() {
             let fileteredArray = this.wishlist.filter((wishlist) => wishlist.userID === this.data.userID)
-            console.log(fileteredArray);
             return fileteredArray;
         }
     },
@@ -58,7 +59,7 @@ export default {
 
                     this.wishlist.splice(indexToRemove, 1);
         
-                    localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));
+                    localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));localStorage.setItem(`Wishlist-${this.data.userID}`, JSON.stringify(this.wishlist));
                 }
           
         } else {
@@ -68,6 +69,9 @@ export default {
         }
       });
             
+        },
+        direct(vehicleID){
+            router.push(`/vehicle/${vehicleID}`)
         }
     }
 }

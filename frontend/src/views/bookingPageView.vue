@@ -52,15 +52,15 @@
 import Swal from "sweetalert2";
 import router from "../router";
 export default {
-  props: ["carId"],
+  props: ["carId"], 
 
   computed: {
     vehicle() {
-      return this.$store.state.viewedVehicle;
+      return this.$store.state.viewedVehicle; 
     },
-    user() {
+    user(){
       return this.$store.state.user;
-    },
+    }
   },
   data() {
     return {
@@ -69,43 +69,58 @@ export default {
         vehicleID: "",
         orderDate: "",
         Total_Booked_Hours: "",
+      
       },
     };
   },
-  created() {
-    this.$store.dispatch("fetchVehicle", this.carId);
+  created() { 
+    this.cartId = parseInt(this.cartId);
+    console.log(typeof this.cartId)
+  this.$store.dispatch("fetchVehicle", this.carId);
     this.$store.dispatch("fetchVehicle", this.carId);
   },
   methods: {
-    book() {
-      const from = document.querySelector("#from");
-      const to = document.querySelector("#to");
-      const date = document.querySelector("#date");
-      const fromVal = from.value;
-      const toVal = to.value;
-      const booked = date.value;
-      const fromTimes = fromVal.split(":");
-      const toTimes = toVal.split(":");
-      const fromMin = parseInt(fromTimes[0]) * 60 + parseInt(fromTimes[1]);
-      const toMin = parseInt(toTimes[0]) * 60 + parseInt(toTimes[1]);
-      const timeDiff = fromMin - toMin;
-      const finalVal = Math.ceil((timeDiff / 60) * -1);
-      this.booking.Total_Booked_Hours = finalVal;
-      this.booking.orderDate = booked;
-    },
+   book() {
+  const from = document.querySelector("#from");
+  const to = document.querySelector("#to");
+  const date = document.querySelector("#date");
+  const fromVal = from.value;
+  const toVal = to.value;
+  const booked = date.value;
+  const fromTimes = fromVal.split(":");
+  const toTimes = toVal.split(":");
+  const fromMin = parseInt(fromTimes[0]) * 60 + parseInt(fromTimes[1]);
+  const toMin = parseInt(toTimes[0]) * 60 + parseInt(toTimes[1]);
+  const timeDiff = fromMin - toMin;
+  const finalVal = Math.ceil(timeDiff / 60 * -1);
+  this.booking.Total_Booked_Hours = finalVal;
+  this.booking.orderDate = booked;
 
-    placeOrder() {
+},
+
+    placeOrder(){
       this.book();
-      this.booking.userID = this.$store.state.user.userID;
+      this.booking.userID= this.$store.state.user.userID;
       this.booking.vehicleID = this.carId;
+      console.log(this.booking)
       this.$store.dispatch("addOrder", this.booking);
-      Swal.fire({
-        icon: "success",
-        title: "Booking has been placed successfully",
-        text: `Our team will get in contact with you soon, ${this.$store.state.user.userName}.`,
-      });
-      router.push("/Vehicles");
-    },
+       Swal.fire({
+         icon: "success",
+         title: "Booking has been placed successfully",
+         text: `Our team will get in contact with you soon, ${this.$store.state.user.userName}.`,
+          });
+        router.push("/Vehicles")
+        .then(() => {
+          const wishlist = JSON.parse(localStorage.getItem(`Wishlist-${this.booking.userID}`));
+          const indexToRemove = wishlist.findIndex(item => item.vehicleID == this.carId);
+          console.log(this.booking, "n woord");
+          if(indexToRemove !== -1) {
+            wishlist.splice(indexToRemove, 1);
+            localStorage.setItem(`Wishlist-${this.booking.userID}`, JSON.stringify(wishlist));
+          }
+        })
+
+    }
   },
 };
 </script>
