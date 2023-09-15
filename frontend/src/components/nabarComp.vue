@@ -111,15 +111,22 @@ width: 100% !important;
 }
 nav {
   padding: 30px;
+  width: 100%;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+
+nav a:hover{
+  scale: 110%;
+padding: 5px;
+background:rgb(228,212,134);
+  box-shadow: 0 0 30px 5px rgb(228,212,134);
+  color: rgb(48,55,62);
+
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+nav a.router-link-exact-active,nav a {
+  color: rgb(228,212,134);
+  font-size: 20px;
 }
 @media  (max-width: 350px){
 .name{

@@ -106,7 +106,7 @@ export default {
 <style scoped>
 .row{
   width: 100%;
- background:rgb(34,34,34)
+ background:rgb(48,55,62);
 }
 .col-6{
   border: 1px solid grey;

@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             <tr v-for="item in wishlist" :key="item.vehicleID">
-                <td><img class="image" :src="item.imageURL" alt=""></td>
+                <td><img class="image my-auto" :src="item.imageURL" alt=""></td>
                 <td>{{ item.vehicleName }}</td>
                 <td>R{{ item.rate }}</td>
                 <td class="my-auto">
@@ -19,7 +19,7 @@
                     <button class="btn btn-success m-2" @click="direct(item.vehicleID)" >View</button>
                 </td>
             </tr>
-        </tbody>``
+        </tbody>
        </table>
          </div>
 </template>
@@ -78,7 +78,7 @@ export default {
 </script>
 <style scoped>
     .image {
-        height: 180px;
+        height: 100px;
         border-radius: 20px;
         /* position: center !important; */
     }

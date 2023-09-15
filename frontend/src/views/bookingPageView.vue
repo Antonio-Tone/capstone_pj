@@ -127,7 +127,7 @@ export default {
 <style scoped>
 .row {
   width: 100%;
-  background: rgb(34, 34, 34);
+  background: rgb(48,55,62);
   min-height: 81.5vh;
 }
 .show {

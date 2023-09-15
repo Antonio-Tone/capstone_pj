@@ -6,7 +6,7 @@
         <div class="options">
           <div class="d-flex head mb-5">
             <div class="category">
-              <label for="categorySelect">Select Category:</label>
+              <label for="categorySelect" class="lead">Select Category:</label>
               <select id="categorySelect" v-model="Categories">
                 <option value="All">All Categories</option>
                 <option value="supercar">Supercars</option>
@@ -15,11 +15,11 @@
               </select>
             </div>
             <div class="search mx-auto">
-              <label for="">Search:</label>
-              <input type="text" v-model="search" placeholder="Search" />
+              <label for="" class="lead">Search:</label>
+              <input type="text" class="enter" v-model="search"/>
             </div>
             <div class="sorting">
-              <label for="">Sort By:</label>
+              <label for="" class="lead">Sort By:</label>
               <div class="d-flex justify-content-center">
                 <button @click="sortByPrice" class="sort">Sort by Price</button>
                 <button @click="sortByName" class="sort">Sort by Name</button>
@@ -28,7 +28,8 @@
           </div>
         </div>
         <div
-          class="col-12 col-sm-6 col-md-4 col-lg-3"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 animated animate__fadeIn "
+          style="animation-delay: 2s;"
           v-for="car in filteredVehicles"
           :key="car.vehicleID"
         >
@@ -150,9 +151,59 @@ img {
   height: auto;
   border-radius: 16px 16px 0 0;
 }
+.enter{
+  background: radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%);
+  border-color:white ;
+  border-radius: 30px;
+  color:rgb(228,212,134);
+  text-align: center;
 
+}
 .card {
   border-radius: 16px;
+  background:rgb(34,34,34);
+  color:rgb(228,212,134);
+/* transition-delay: 2s; */
+
+}
+.card:hover{
+  scale: 105%;
+    box-shadow: rgb(228,212,134) 0px 5px 5px 5px;
+    transition: 1s ease-in-out ;
+}
+.card-title{
+  font-size:15px;
+}
+
+.view{
+  background: radial-gradient(circle at 10% 20%, rgb(69, 86, 102) 0%, rgb(34, 34, 34) 90%);
+ color: white;
+ box-shadow: 0 0 0 0 transparent;
+ -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  border-radius: 10px;
+}
+.view:hover{
+  padding: 5px 8px 5px 8px;
+  background: rgb(228,212,134);
+  box-shadow: 0 0 30px 5px rgb(228,212,134);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  color:rgb(34,34,34);
+
+  
+
+}
+.lead,h2{
+  color:rgb(228,212,134);
+}
+#categorySelect,.sort{
+ color: white;
+ border-radius: 10px;
+ background: rgb(48,55,62);
+border-color:white ;
 }
 
 
@@ -162,8 +213,10 @@ img {
   justify-content: center;
 }
 
-.category,
-.sorting,
+
+.sort{
+  margin: 5px;
+}
 .search {
   flex: 1;
   margin: 10px;
